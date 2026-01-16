@@ -1,0 +1,23 @@
+{
+  "name": "explore-kaltim",
+  "version": "1.0.0",
+  "description": "Explore East Borneo - Tourism Landing Page",
+  "main": "index.html",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/css/style.css -o ./dist/css/output.css",
+    "watch:css": "tailwindcss -i ./src/css/style.css -o ./dist/css/output.css --watch",
+    "dev": "tailwindcss -i ./src/css/style.css -o ./dist/css/output.css --watch"
+  },
+  "keywords": [
+    "tourism",
+    "kalimantan",
+    "borneo",
+    "travel"
+  ],
+  "author": "Explore Kaltim Team",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
+

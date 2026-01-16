@@ -1,0 +1,122 @@
+<!-- Hero Section - Immersive Video Background -->
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- Video Background -->
+  <div class="absolute inset-0 z-0">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=1920&q=80"
+      class="w-full h-full object-cover"
+    >
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-tropical-island-seen-from-the-water-1175-large.mp4" type="video/mp4">
+      <!-- Fallback image if video doesn't load -->
+    </video>
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-primary-950/60 via-primary-900/40 to-primary-950/80"></div>
+    <!-- Animated grain texture -->
+    <div class="absolute inset-0 grain-overlay opacity-30"></div>
+  </div>
+
+  <!-- Floating Decorative Elements -->
+  <div class="absolute top-1/4 left-10 w-20 h-20 rounded-full bg-secondary-400/20 blur-xl float-element hidden lg:block"></div>
+  <div class="absolute bottom-1/4 right-10 w-32 h-32 rounded-full bg-primary-400/20 blur-xl float-element-delayed hidden lg:block"></div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 container mx-auto px-4 lg:px-8 text-center">
+    <div class="max-w-5xl mx-auto">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8" data-aos="fade-down" data-aos-delay="100">
+        <span class="w-2 h-2 rounded-full bg-secondary-400 animate-pulse"></span>
+        <span class="text-white/90 text-sm font-display">Destinasi Wisata Terbaik 2025</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold text-white leading-tight mb-6" data-aos="fade-up" data-aos-delay="200">
+        Jelajahi Keajaiban
+        <span class="block text-gradient-light">Kalimantan Timur</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-lg md:text-xl lg:text-2xl text-white/80 font-body max-w-3xl mx-auto mb-10 leading-relaxed" data-aos="fade-up" data-aos-delay="300">
+        Temukan surga tersembunyi di Borneo — dari kepulauan Derawan yang memukau hingga hutan hujan purba yang misterius
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16" data-aos="fade-up" data-aos-delay="400">
+        <a href="#destinations" class="btn-primary group">
+          <span>Jelajahi Destinasi</span>
+          <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+        <button id="play-video-btn" class="btn-secondary group">
+          <span class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-primary-900 transition-all">
+            <svg class="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </span>
+          <span>Tonton Video</span>
+        </button>
+      </div>
+
+      <!-- Stats Preview -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="500">
+        <div class="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+          <div class="text-3xl md:text-4xl font-heading font-bold text-white mb-1">100+</div>
+          <div class="text-white/60 text-sm">Spot Diving</div>
+        </div>
+        <div class="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+          <div class="text-3xl md:text-4xl font-heading font-bold text-white mb-1">50+</div>
+          <div class="text-white/60 text-sm">Pulau Eksotis</div>
+        </div>
+        <div class="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+          <div class="text-3xl md:text-4xl font-heading font-bold text-white mb-1">5</div>
+          <div class="text-white/60 text-sm">Taman Nasional</div>
+        </div>
+        <div class="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+          <div class="text-3xl md:text-4xl font-heading font-bold text-white mb-1">10K+</div>
+          <div class="text-white/60 text-sm">Happy Travelers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10" data-aos="fade-up" data-aos-delay="600">
+    <a href="#destinations" class="flex flex-col items-center gap-2 text-white/60 hover:text-white transition-colors group">
+      <span class="text-sm font-display">Scroll untuk jelajahi</span>
+      <div class="w-6 h-10 rounded-full border-2 border-current flex justify-center pt-2">
+        <div class="w-1.5 h-1.5 rounded-full bg-current animate-bounce"></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Wave Separator -->
+  <div class="absolute bottom-0 left-0 right-0 z-10">
+    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+      <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f5f5f4"/>
+    </svg>
+  </div>
+</section>
+
+<!-- Video Modal -->
+<div id="video-modal" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 opacity-0 invisible transition-all duration-300">
+  <button id="close-video-modal" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+  <div class="w-full max-w-5xl mx-4 aspect-video bg-black rounded-2xl overflow-hidden">
+    <iframe
+      id="youtube-player"
+      class="w-full h-full"
+      src=""
+      title="Explore Kaltim Video"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>

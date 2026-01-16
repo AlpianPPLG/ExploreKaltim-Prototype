@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jelajahi keajaiban Kalimantan Timur - Kepulauan Derawan, Labuan Cermin, Bukit Bangkirai dan destinasi wisata eksotis lainnya di Borneo.">
+  <meta name="keywords" content="Kalimantan Timur, Derawan, Labuan Cermin, wisata Borneo, diving Indonesia, ekowisata">
+  <meta name="author" content="Explore Kaltim">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Explore Kaltim - Jelajahi Keajaiban Kalimantan Timur">
+  <meta property="og:description" content="Temukan surga tersembunyi di Borneo - dari kepulauan Derawan yang memukau hingga hutan hujan purba yang misterius">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=1200&q=80">
+  <meta property="og:type" content="website">
+
+  <title>Explore Kaltim - Jelajahi Keajaiban Kalimantan Timur</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌴</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- AOS - Animate On Scroll -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Tailwind CSS (CDN for development - replace with build output for production) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22',
+            },
+            secondary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+              950: '#082f49',
+            },
+            accent: {
+              50: '#fafaf9',
+              100: '#f5f5f4',
+              200: '#e7e5e4',
+              300: '#d6d3d1',
+            },
+          },
+          fontFamily: {
+            'heading': ['Playfair Display', 'serif'],
+            'display': ['Montserrat', 'sans-serif'],
+            'body': ['Poppins', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <style>
+    /* Base Styles */
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+
+    ::selection { background-color: #0ea5e9; color: white; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #e7e5e4; }
+    ::-webkit-scrollbar-thumb { background: #047857; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #065f46; }
+
+    /* Glass Effect */
+    .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.2); }
+    .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.5); }
+
+    /* Button Styles */
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 1rem 2rem; background: linear-gradient(to right, #065f46, #064e3b);
+      color: white; font-family: 'Montserrat', sans-serif; font-weight: 600;
+      border-radius: 9999px; box-shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.3);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 35px -5px rgba(6, 78, 59, 0.4); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 1rem 2rem; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px);
+      color: white; font-family: 'Montserrat', sans-serif; font-weight: 600;
+      border-radius: 9999px; border: 2px solid rgba(255, 255, 255, 0.4);
+      transition: all 0.3s ease;
+    }
+    .btn-secondary:hover { background: white; color: #064e3b; transform: translateY(-2px); }
+
+    /* Card Styles */
+    .destination-card {
+      position: relative; overflow: hidden; border-radius: 1.5rem; background: white;
+      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
+      transition: all 0.5s ease; cursor: pointer;
+    }
+    .destination-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.3); }
+    .destination-card .card-image { width: 100%; height: 16rem; object-fit: cover; transition: transform 0.7s ease; }
+    .destination-card:hover .card-image { transform: scale(1.1); }
+    .destination-card .card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent);
+      opacity: 0.6; transition: opacity 0.3s;
+    }
+    .destination-card:hover .card-overlay { opacity: 0.8; }
+
+    /* Filter Pills */
+    .filter-pill {
+      padding: 0.625rem 1.5rem; border-radius: 9999px;
+      font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 0.875rem;
+      background: white; color: #4b5563; border: 1px solid #e5e7eb;
+      transition: all 0.3s; cursor: pointer;
+    }
+    .filter-pill:hover { border-color: #10b981; color: #047857; }
+    .filter-pill.active { background: #064e3b; color: white; border-color: #064e3b; box-shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.3); }
+
+    /* Navigation */
+    .nav-link {
+      position: relative; font-family: 'Montserrat', sans-serif; font-weight: 500;
+      color: rgba(255, 255, 255, 0.9); transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: #38bdf8;
+      transition: width 0.3s;
+    }
+    .nav-link:hover { color: white; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Testimonial Card */
+    .testimonial-card {
+      padding: 2rem; border-radius: 1.5rem; background: white;
+      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+      border: 1px solid #f3f4f6; transition: box-shadow 0.3s;
+    }
+    .testimonial-card:hover { box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.15); }
+
+    /* Input Styles */
+    .input-field {
+      width: 100%; padding: 1rem 1.25rem; border-radius: 0.75rem;
+      background: white; border: 1px solid #e5e7eb;
+      color: #1f2937; transition: all 0.3s;
+    }
+    .input-field:focus { outline: none; border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); }
+    .input-field::placeholder { color: #9ca3af; }
+
+    /* Floating Animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    .float-element { animation: float 6s ease-in-out infinite; }
+    .float-element-delayed { animation: float 6s ease-in-out infinite; animation-delay: 2s; }
+
+    /* Gradient Text */
+    .text-gradient {
+      background: linear-gradient(to right, #065f46, #059669, #0ea5e9);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-gradient-light {
+      background: linear-gradient(to right, #ffffff, #bae6fd);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Page Loader */
+    #page-loader {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      background: #064e3b; transition: all 0.5s;
+    }
+    #page-loader.loaded { opacity: 0; visibility: hidden; }
+    .loader {
+      width: 48px; height: 48px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #0ea5e9; border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 60;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0, 0, 0, 0.95);
+      opacity: 0; visibility: hidden; transition: all 0.3s;
+    }
+    .lightbox.active { opacity: 1; visibility: visible; }
+
+    /* Line Clamp */
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+    /* Grain Overlay */
+    .grain-overlay::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03; pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-[#f5f5f4] text-gray-800 antialiased">
+  <!-- Page Loader -->
+  <div id="page-loader">
+    <div class="text-center">
+      <div class="loader mx-auto mb-4"></div>
+      <p class="text-white/80 font-display">Loading paradise...</p>
+    </div>
+  </div>
+
+  <!-- Navbar Component - Glassmorphism Sticky -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary-400 to-primary-600 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/>
+            </svg>
+          </div>
+          <span class="text-xl font-heading font-bold text-white">
+            Explore<span class="text-secondary-400">Kaltim</span>
+          </span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center gap-8">
+          <a href="#home" class="nav-link">Beranda</a>
+          <a href="#destinations" class="nav-link">Destinasi</a>
+          <a href="#gallery" class="nav-link">Galeri</a>
+          <a href="#testimonials" class="nav-link">Testimoni</a>
+          <a href="#contact" class="nav-link">Kontak</a>
+        </div>
+
+        <!-- CTA Button Desktop -->
+        <div class="hidden lg:block">
+          <a href="#contact" class="inline-flex items-center gap-2 px-6 py-2.5 bg-secondary-500 text-white font-display font-semibold rounded-full hover:bg-secondary-600 transform hover:scale-105 transition-all duration-300 shadow-lg shadow-secondary-500/30">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            Booking
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-lg bg-white/10 backdrop-blur-sm" aria-label="Toggle Menu">
+          <span class="hamburger-line w-6 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+          <span class="hamburger-line w-6 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+          <span class="hamburger-line w-4 h-0.5 bg-white rounded-full transition-all duration-300 ml-auto mr-2"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden fixed inset-0 top-20 bg-primary-900/98 backdrop-blur-xl transform translate-x-full transition-transform duration-500 ease-out z-40">
+      <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col gap-4">
+          <a href="#home" class="mobile-nav-link text-2xl font-heading text-white py-4 border-b border-white/10 hover:text-secondary-400 transition-colors" data-close-menu>Beranda</a>
+          <a href="#destinations" class="mobile-nav-link text-2xl font-heading text-white py-4 border-b border-white/10 hover:text-secondary-400 transition-colors" data-close-menu>Destinasi</a>
+          <a href="#gallery" class="mobile-nav-link text-2xl font-heading text-white py-4 border-b border-white/10 hover:text-secondary-400 transition-colors" data-close-menu>Galeri</a>
+          <a href="#testimonials" class="mobile-nav-link text-2xl font-heading text-white py-4 border-b border-white/10 hover:text-secondary-400 transition-colors" data-close-menu>Testimoni</a>
+          <a href="#contact" class="mobile-nav-link text-2xl font-heading text-white py-4 border-b border-white/10 hover:text-secondary-400 transition-colors" data-close-menu>Kontak</a>
+
+          <a href="#contact" class="mt-6 btn-primary text-center" data-close-menu>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            Booking Sekarang
+          </a>
+        </div>
+
+        <!-- Social Links Mobile -->
+        <div class="mt-12 flex items-center gap-4">
+          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-secondary-500 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-secondary-500 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
+          </a>
+          <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-secondary-500 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section - Immersive Video Background -->
+  <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Video Background -->
+    <div class="absolute inset-0 z-0">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=1920&q=80"
+        class="w-full h-full object-cover"
+      >
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-tropical-island-seen-from-the-water-1175-large.mp4" type="video/mp4">
+      </video>
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-b from-primary-950/60 via-primary-900/40 to-primary-950/80"></div>
+      <!-- Animated grain texture -->
+      <div class="absolute inset-0 grain-overlay opacity-30"></div>
+    </div>
+
+    <!-- Floating Decorative Elements -->
+    <div class="absolute top-1/4 left-10 w-20 h-20 rounded-full bg-secondary-400/20 blur-xl float-element hidden lg:block"></div>
+    <div class="absolute bottom-1/4 right-10 w-32 h-32 rounded-full bg-primary-400/20 blur-xl float-element-delayed hidden lg:block"></div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 container mx-auto px-4 lg:px-8 text-center">
+      <div class="max-w-5xl mx-auto">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8" data-aos="fade-down" data-aos-delay="100">
+          <span class="w-2 h-2 rounded-full bg-secondary-400 animate-pulse"></span>
+          <span class="text-white/90 text-sm font-display">Destinasi Wisata Terbaik 2025</span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold text-white leading-tight mb-6" data-aos="fade-up" data-aos-delay="200">
+          Jelajahi Keajaiban
+          <span class="block text-gradient-light">Kalimantan Timur</span>
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="text-lg md:text-xl lg:text-2xl text-white/80 font-body max-w-3xl mx-auto mb-10 leading-relaxed" data-aos="fade-up" data-aos-delay="300">
+          Temukan surga tersembunyi di Borneo — dari kepulauan Derawan yang memukau hingga hutan hujan purba yang misterius
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16" data-aos="fade-up" data-aos-delay="400">
+          <a href="#destinations" class="btn-primary group">
+            <span>Jelajahi Destinasi</span>
+            <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+          <button id="play-video-btn" class="btn-secondary group">
+            <span class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-primary-900 transition-all">
+              <svg class="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </span>
+            <span>Tonton Video</span>
+          </button>
+        </div>
+
+        <!-- Stats Preview -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="500">
+          <div class="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+            <div class="text-3xl md:text-4xl font-heading font-bold text-white mb-1">100+</div>
+            <div class="text-white/60 text-sm">Spot Diving</div>
+          </div>
+          <div class="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+            <div class="text-3xl md:text-4xl font-heading font-bold text-white mb-1">50+</div>
+            <div class="text-white/60 text-sm">Pulau Eksotis</div>
+          </div>
+          <div class="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+            <div class="text-3xl md:text-4xl font-heading font-bold text-white mb-1">5</div>
+            <div class="text-white/60 text-sm">Taman Nasional</div>
+          </div>
+          <div class="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+            <div class="text-3xl md:text-4xl font-heading font-bold text-white mb-1">10K+</div>
+            <div class="text-white/60 text-sm">Happy Travelers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10" data-aos="fade-up" data-aos-delay="600">
+      <a href="#destinations" class="flex flex-col items-center gap-2 text-white/60 hover:text-white transition-colors group">
+        <span class="text-sm font-display">Scroll untuk jelajahi</span>
+        <div class="w-6 h-10 rounded-full border-2 border-current flex justify-center pt-2">
+          <div class="w-1.5 h-1.5 rounded-full bg-current animate-bounce"></div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Wave Separator -->
+    <div class="absolute bottom-0 left-0 right-0 z-10">
+      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+        <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f5f5f4"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Video Modal -->
+  <div id="video-modal" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 opacity-0 invisible transition-all duration-300">
+    <button id="close-video-modal" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <div class="w-full max-w-5xl mx-4 aspect-video bg-black rounded-2xl overflow-hidden">
+      <iframe
+        id="youtube-player"
+        class="w-full h-full"
+        src=""
+        title="Explore Kaltim Video"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main>
+
+    <!-- ========== DESTINATIONS SECTION ========== -->
+    <section id="destinations" class="py-20 lg:py-32 bg-accent-100">
+      <div class="container mx-auto px-4 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-12 lg:mb-16">
+          <span class="inline-block px-4 py-1.5 rounded-full bg-primary-100 text-primary-800 text-sm font-display font-semibold mb-4" data-aos="fade-up">
+            ✨ Destinasi Unggulan
+          </span>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-900 mb-6" data-aos="fade-up" data-aos-delay="100">
+            Keajaiban yang <span class="text-gradient">Menanti</span>
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            Jelajahi destinasi wisata terbaik di Kalimantan Timur, dari surga bawah laut hingga rimba yang misterius
+          </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div id="filter-container" class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up" data-aos-delay="300">
+          <!-- Filter pills will be rendered by JS -->
+        </div>
+
+        <!-- Destinations Grid -->
+        <div id="destinations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Destination cards will be rendered by JS -->
+        </div>
+
+        <!-- View All Button -->
+        <div class="text-center mt-12" data-aos="fade-up">
+          <a href="#" class="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-primary-800 text-primary-800 font-display font-semibold hover:bg-primary-800 hover:text-white transition-all duration-300">
+            Lihat Semua Destinasi
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== EXPERIENCE/STATS SECTION ========== -->
+    <section class="relative py-24 lg:py-32 overflow-hidden">
+      <!-- Background Image -->
+      <div class="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=80"
+          alt="Borneo Rainforest"
+          class="w-full h-full object-cover"
+        >
+        <div class="absolute inset-0 bg-primary-950/80"></div>
+      </div>
+
+      <div class="relative z-10 container mx-auto px-4 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <!-- Left Content -->
+          <div data-aos="fade-right">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-secondary-300 text-sm font-display font-semibold mb-6">
+              🌿 Pengalaman Tak Terlupakan
+            </span>
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 leading-tight">
+              Rasakan Keajaiban <span class="text-secondary-400">Borneo</span>
+            </h2>
+            <p class="text-lg text-white/80 mb-8 leading-relaxed">
+              Kalimantan Timur menyimpan kekayaan alam yang luar biasa. Dari lautan biru yang jernih hingga hutan hujan purba yang masih terjaga, setiap sudut menyimpan petualangan baru.
+            </p>
+
+            <!-- Features -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/10 backdrop-blur-sm">
+                <div class="w-10 h-10 rounded-full bg-secondary-500/20 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <span class="text-white font-display font-medium">Diving Spot Kelas Dunia</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/10 backdrop-blur-sm">
+                <div class="w-10 h-10 rounded-full bg-secondary-500/20 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <span class="text-white font-display font-medium">Hutan Hujan Tropis</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/10 backdrop-blur-sm">
+                <div class="w-10 h-10 rounded-full bg-secondary-500/20 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <span class="text-white font-display font-medium">Budaya Dayak Autentik</span>
+              </div>
+              <div class="flex items-center gap-3 p-4 rounded-xl bg-white/10 backdrop-blur-sm">
+                <div class="w-10 h-10 rounded-full bg-secondary-500/20 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <span class="text-white font-display font-medium">Satwa Liar Endemik</span>
+              </div>
+            </div>
+
+            <a href="#contact" class="btn-primary">
+              Mulai Petualangan
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Right Content - Stats -->
+          <div class="grid grid-cols-2 gap-6" data-aos="fade-left" data-aos-delay="200">
+            <div class="text-center p-8 rounded-3xl bg-white/10 backdrop-blur-lg border border-white/20 hover:bg-white/20 transition-all duration-300">
+              <div class="text-5xl md:text-6xl font-heading font-bold text-white mb-2" data-counter="100">0</div>
+              <div class="text-secondary-300 font-display">Spot Diving</div>
+            </div>
+            <div class="text-center p-8 rounded-3xl bg-white/10 backdrop-blur-lg border border-white/20 hover:bg-white/20 transition-all duration-300 mt-8">
+              <div class="text-5xl md:text-6xl font-heading font-bold text-white mb-2" data-counter="50">0</div>
+              <div class="text-secondary-300 font-display">Pulau Eksotis</div>
+            </div>
+            <div class="text-center p-8 rounded-3xl bg-white/10 backdrop-blur-lg border border-white/20 hover:bg-white/20 transition-all duration-300">
+              <div class="text-5xl md:text-6xl font-heading font-bold text-white mb-2" data-counter="5">0</div>
+              <div class="text-secondary-300 font-display">Taman Nasional</div>
+            </div>
+            <div class="text-center p-8 rounded-3xl bg-white/10 backdrop-blur-lg border border-white/20 hover:bg-white/20 transition-all duration-300 mt-8">
+              <div class="text-5xl md:text-6xl font-heading font-bold text-white mb-2" data-counter="10000">0</div>
+              <div class="text-secondary-300 font-display">Wisatawan/Tahun</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== GALLERY SECTION ========== -->
+    <section id="gallery" class="py-20 lg:py-32 bg-white">
+      <div class="container mx-auto px-4 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-12 lg:mb-16">
+          <span class="inline-block px-4 py-1.5 rounded-full bg-secondary-100 text-secondary-800 text-sm font-display font-semibold mb-4" data-aos="fade-up">
+            📸 Galeri Foto
+          </span>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-900 mb-6" data-aos="fade-up" data-aos-delay="100">
+            Momen <span class="text-gradient">Menakjubkan</span>
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            Lihat keindahan Kalimantan Timur melalui lensa para fotografer dan traveler dari seluruh dunia
+          </p>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <!-- Gallery items will be rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+      <button onclick="closeLightbox()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      <button onclick="navigateLightbox(-1)" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <button onclick="navigateLightbox(1)" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+      <img id="lightbox-image" src="" alt="" class="max-w-[90vw] max-h-[85vh] object-contain rounded-lg">
+    </div>
+
+    <!-- ========== TESTIMONIALS SECTION ========== -->
+    <section id="testimonials" class="py-20 lg:py-32 bg-gradient-to-br from-accent-100 to-accent-200">
+      <div class="container mx-auto px-4 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-12 lg:mb-16">
+          <span class="inline-block px-4 py-1.5 rounded-full bg-primary-100 text-primary-800 text-sm font-display font-semibold mb-4" data-aos="fade-up">
+            💬 Testimoni
+          </span>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-900 mb-6" data-aos="fade-up" data-aos-delay="100">
+            Kata <span class="text-gradient">Mereka</span>
+          </h2>
+          <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            Dengarkan pengalaman dari wisatawan yang telah menjelajahi keindahan Kalimantan Timur
+          </p>
+        </div>
+
+        <!-- Testimonials Grid -->
+        <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Testimonials will be rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT/BOOKING SECTION ========== -->
+    <section id="contact" class="py-20 lg:py-32 bg-white">
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <!-- Left - Contact Info -->
+          <div data-aos="fade-right">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-secondary-100 text-secondary-800 text-sm font-display font-semibold mb-4">
+              📍 Hubungi Kami
+            </span>
+            <h2 class="text-4xl md:text-5xl font-heading font-bold text-primary-900 mb-6">
+              Siap Memulai <span class="text-gradient">Petualangan?</span>
+            </h2>
+            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+              Kirimkan pertanyaan atau request booking Anda. Tim kami akan membantu merencanakan perjalanan impian Anda ke Kalimantan Timur.
+            </p>
+
+            <!-- Contact Cards -->
+            <div class="space-y-4 mb-8">
+              <div class="flex items-center gap-4 p-5 rounded-2xl bg-accent-100 hover:bg-accent-200 transition-colors">
+                <div class="w-14 h-14 rounded-xl bg-primary-800 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-display font-semibold text-gray-900">Alamat</h4>
+                  <p class="text-gray-600">Jl. Gajah Mada No. 123, Samarinda, Kalimantan Timur</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 p-5 rounded-2xl bg-accent-100 hover:bg-accent-200 transition-colors">
+                <div class="w-14 h-14 rounded-xl bg-secondary-500 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-display font-semibold text-gray-900">Email</h4>
+                  <a href="mailto:hello@explorekaltim.id" class="text-secondary-600 hover:text-secondary-700">hello@explorekaltim.id</a>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 p-5 rounded-2xl bg-accent-100 hover:bg-accent-200 transition-colors">
+                <div class="w-14 h-14 rounded-xl bg-green-600 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-display font-semibold text-gray-900">WhatsApp</h4>
+                  <a href="https://wa.me/62541123456" class="text-green-600 hover:text-green-700">+62 541 123 456</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex items-center gap-3">
+              <span class="text-gray-500 font-display text-sm">Follow us:</span>
+              <a href="#" class="w-10 h-10 rounded-full bg-primary-800 flex items-center justify-center text-white hover:bg-primary-700 transition-colors">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center text-white hover:opacity-90 transition-opacity">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white hover:bg-red-700 transition-colors">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right - Contact Form -->
+          <div data-aos="fade-left" data-aos-delay="200">
+            <div class="bg-accent-100 rounded-3xl p-8 lg:p-10">
+              <h3 class="text-2xl font-heading font-bold text-gray-900 mb-6">Kirim Pesan</h3>
+
+              <form id="contact-form" class="space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="name" class="block text-sm font-display font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      class="input-field"
+                      placeholder="John Doe"
+                    >
+                  </div>
+                  <div>
+                    <label for="email" class="block text-sm font-display font-medium text-gray-700 mb-2">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      class="input-field"
+                      placeholder="john@example.com"
+                    >
+                  </div>
+                </div>
+
+                <div>
+                  <label for="phone" class="block text-sm font-display font-medium text-gray-700 mb-2">Nomor WhatsApp</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    class="input-field"
+                    placeholder="+62 812 3456 7890"
+                  >
+                </div>
+
+                <div>
+                  <label for="destination" class="block text-sm font-display font-medium text-gray-700 mb-2">Destinasi yang Diminati</label>
+                  <select id="destination" name="destination" class="input-field">
+                    <option value="">Pilih destinasi...</option>
+                    <option value="derawan">Kepulauan Derawan</option>
+                    <option value="labuan-cermin">Danau Labuan Cermin</option>
+                    <option value="maratua">Pulau Maratua</option>
+                    <option value="bangkirai">Bukit Bangkirai</option>
+                    <option value="pampang">Desa Adat Pampang</option>
+                    <option value="custom">Paket Custom</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="message" class="block text-sm font-display font-medium text-gray-700 mb-2">Pesan</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    required
+                    class="input-field resize-none"
+                    placeholder="Ceritakan rencana perjalanan Anda..."
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full btn-primary justify-center"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                  </svg>
+                  <span>Kirim Pesan</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CTA SECTION ========== -->
+    <section class="relative py-24 lg:py-32 overflow-hidden">
+      <!-- Background -->
+      <div class="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1920&q=80"
+          alt="Maratua Island"
+          class="w-full h-full object-cover"
+        >
+        <div class="absolute inset-0 bg-gradient-to-r from-primary-950/95 to-primary-900/80"></div>
+      </div>
+
+      <div class="relative z-10 container mx-auto px-4 lg:px-8 text-center">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6" data-aos="fade-up">
+            Siap untuk <span class="text-secondary-400">Petualangan</span> Berikutnya?
+          </h2>
+          <p class="text-lg md:text-xl text-white/80 mb-10" data-aos="fade-up" data-aos-delay="100">
+            Bergabunglah dengan ribuan traveler yang telah menemukan keajaiban Kalimantan Timur. Booking sekarang dan dapatkan penawaran spesial!
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+            <a href="#contact" class="btn-primary">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              Booking Sekarang
+            </a>
+            <a href="https://wa.me/62541123456" target="_blank" class="btn-secondary">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Chat WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-primary-800 text-white shadow-xl flex items-center justify-center opacity-0 invisible transform translate-y-4 transition-all duration-300 hover:bg-primary-700 hover:scale-110 z-50" aria-label="Kembali ke atas">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+  </button>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <!-- AOS Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- App Scripts -->
+  <script src="./src/js/data.js"></script>
+  <script src="./src/js/components.js"></script>
+  <script src="./src/js/animations.js"></script>
+  <script src="./src/js/main.js"></script>
+</body>
+</html>
+
