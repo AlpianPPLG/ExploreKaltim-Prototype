@@ -1,193 +1,163 @@
-# 🌴 Explore Kaltim - East Borneo Tourism Landing Page
+# 🌴 Explore Kaltim - Tourism Landing Page
 
-![Explore Kaltim](https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=1200&q=80)
+Modern, responsive landing page untuk mempromosikan keindahan wisata Kalimantan Timur.
 
-A modern, responsive, and immersive landing page showcasing the natural wonders of East Kalimantan (Borneo), Indonesia.
+![Explore Kaltim](https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=800&q=80)
 
-## ✨ Features
+## ✨ Fitur
 
-- **🎬 Hero Section** - Stunning video background with animated elements
-- **🗺️ Destination Cards** - Interactive grid with hover effects
-- **🏷️ Category Filters** - Water activities, Forest/Nature, Culture
-- **📸 Interactive Gallery** - Lightbox for fullscreen image viewing
-- **💬 Testimonials** - Slider with visitor reviews
-- **📧 Contact Form** - Simple inquiry/booking form
-- **📱 Fully Responsive** - Works on all devices
+- **🎬 Hero Section** - Video background dengan CTA yang menarik
+- **🏝️ Destinasi Unggulan** - Grid kartu interaktif dengan filter kategori
+- **📸 Interactive Gallery** - Lightbox untuk melihat foto lebih besar
+- **💬 Testimonial** - Review dari wisatawan
+- **📧 Contact Form** - Form booking yang simple
+- **📱 Fully Responsive** - Tampilan optimal di semua device
 - **🎨 Modern UI/UX** - Glassmorphism, parallax, smooth animations
 
-## 🛠️ Tech Stack
+## 🏗️ Struktur Project (Modular)
 
-- **HTML5** - Semantic markup
-- **Tailwind CSS** - Utility-first CSS framework
-- **Vanilla JavaScript** - No framework dependencies
-- **AOS** - Animate On Scroll library
+```
+/explore-kaltim
+├── index.html              # Halaman utama (clean, hanya placeholders)
+├── package.json            # Dependencies
+├── tailwind.config.js      # Konfigurasi Tailwind
+│
+├── /src
+│   ├── /css
+│   │   └── style.css       # Custom CSS & styling
+│   │
+│   ├── /js
+│   │   ├── main.js         # Entry point & logic utama
+│   │   ├── animations.js   # AOS & animasi custom
+│   │   ├── components.js   # Loader untuk komponen HTML
+│   │   └── data.js         # Data destinasi (JSON style)
+│   │
+│   ├── /components         # Komponen HTML terpisah
+│   │   ├── navbar.html     # Navigasi glassmorphism
+│   │   ├── hero.html       # Hero section dengan video
+│   │   ├── destinations.html
+│   │   ├── experience.html
+│   │   ├── gallery.html
+│   │   ├── testimonials.html
+│   │   ├── contact.html
+│   │   └── footer.html
+│   │
+│   └── /assets
+│       ├── /img
+│       ├── /video
+│       └── /icons
+│           └── favicon.svg
+```
 
 ## 🎨 Design System
 
 ### Color Palette
-- **Primary (Emerald Green)**: `#064e3b` - Representing rainforests
-- **Secondary (Turquoise Blue)**: `#0ea5e9` - Representing crystal clear waters
-- **Accent (Sandy Beige)**: `#f5f5f4` - Neutral backgrounds
+| Warna | Hex Code | Penggunaan |
+|-------|----------|------------|
+| Primary (Emerald) | `#064e3b` | Hutan hujan |
+| Secondary (Sky) | `#0ea5e9` | Kejernihan air |
+| Accent | `#f5f5f4` | Background netral |
 
 ### Typography
-- **Headings**: Playfair Display (Elegant/Luxury feel)
-- **Display**: Montserrat (Modern/Clean)
-- **Body**: Poppins (Readable/Friendly)
+- **Heading**: Playfair Display (elegan/luxury)
+- **Display**: Montserrat (modern/bold)  
+- **Body**: Poppins (readable)
 
-## 📁 Project Structure
+### Visual Effects
+- ✅ Glassmorphism pada navbar & cards
+- ✅ Parallax scroll
+- ✅ AOS (Animate On Scroll)
+- ✅ Counter animations
+- ✅ Smooth hover effects
 
-```
-/explore-kaltim
-├── index.html              # Main page
-├── package.json            # NPM configuration
-├── tailwind.config.js      # Tailwind configuration
-├── .gitignore
-├── README.md
-│
-├── /dist
-│   └── /css
-│       └── output.css      # Compiled Tailwind CSS
-│
-└── /src
-    ├── /css
-    │   └── style.css       # Custom styles & Tailwind directives
-    │
-    ├── /js
-    │   ├── main.js         # Entry point
-    │   ├── animations.js   # AOS/GSAP animations
-    │   ├── components.js   # HTML component loader
-    │   └── data.js         # Destination data
-    │
-    ├── /components
-    │   ├── navbar.html     # Navigation
-    │   ├── hero.html       # Hero section
-    │   ├── card-item.html  # Card template
-    │   └── footer.html     # Footer
-    │
-    └── /assets
-        ├── /img            # Images
-        ├── /video          # Video files
-        └── /icons          # SVG icons
-```
+## 🚀 Cara Menjalankan
 
-## 🚀 Getting Started
+### Development
+1. Buka project di XAMPP atau server lokal lainnya
+2. Akses `http://localhost/ExploreKaltim`
 
-### Prerequisites
-- Node.js 16+ 
-- npm or yarn
-
-### Installation
-
-1. Clone the repository
+### Atau dengan Live Server
 ```bash
-git clone https://github.com/yourusername/explore-kaltim.git
-cd explore-kaltim
+# Install VS Code Live Server extension
+# Klik kanan index.html -> Open with Live Server
 ```
 
-2. Install dependencies
-```bash
-npm install
-```
+## 📁 Sistem Komponen
 
-3. Build CSS
-```bash
-npm run build:css
-```
+Website ini menggunakan sistem komponen modular dimana:
 
-4. For development (watch mode)
-```bash
-npm run dev
-```
+1. **index.html** hanya berisi placeholders dan struktur dasar
+2. **components.js** memuat semua komponen HTML secara dinamis
+3. Setiap section adalah file HTML terpisah di folder `/components`
 
-5. Open `index.html` in your browser or use a local server
+### Keuntungan:
+- ✅ Kode lebih terorganisir
+- ✅ Mudah di-maintain
+- ✅ Mirip struktur framework modern
+- ✅ Tidak ada spaghetti code
 
-### Using Local Server (Recommended)
-```bash
-# Using Python
-python -m http.server 8000
-
-# Using PHP
-php -S localhost:8000
-
-# Using Node.js (npx)
-npx serve
-```
-
-## 📍 Featured Destinations
-
-1. **Kepulauan Derawan** - World-class diving with green turtles
-2. **Danau Labuan Cermin** - Crystal clear two-layer lake
-3. **Pulau Maratua** - Pristine blue lagoon
-4. **Bukit Bangkirai** - Rainforest canopy bridge
-5. **Pulau Kakaban** - Stingless jellyfish lake
-6. **Desa Adat Pampang** - Dayak cultural village
-7. **Taman Nasional Kutai** - Orangutan wildlife sanctuary
-
-## 🔧 Customization
-
-### Adding New Destinations
-Edit `src/js/data.js` and add to the `destinations` array:
-
+### Urutan Loading Komponen:
 ```javascript
-{
-  id: 11,
-  name: "Your Destination",
-  slug: "your-destination",
-  category: "water", // water, forest, or culture
-  location: "Location, East Kalimantan",
-  description: "Full description...",
-  shortDesc: "Short description",
-  image: "image-url.jpg",
-  rating: 4.8,
-  reviews: 1000,
-  price: "Mulai Rp 500.000",
-  duration: "2-3 Days",
-  highlights: ["Feature 1", "Feature 2"],
-  featured: true
-}
+const componentConfig = [
+  { id: 'navbar-placeholder', path: './src/components/navbar.html' },
+  { id: 'hero-placeholder', path: './src/components/hero.html' },
+  { id: 'destinations-placeholder', path: './src/components/destinations.html' },
+  { id: 'experience-placeholder', path: './src/components/experience.html' },
+  { id: 'gallery-placeholder', path: './src/components/gallery.html' },
+  { id: 'testimonials-placeholder', path: './src/components/testimonials.html' },
+  { id: 'contact-placeholder', path: './src/components/contact.html' },
+  { id: 'footer-placeholder', path: './src/components/footer.html' }
+];
 ```
 
-### Changing Colors
-Edit `tailwind.config.js` to modify the color palette:
+## 📝 Cara Edit
 
+### Menambah Destinasi Baru
+Edit file `src/js/data.js`:
 ```javascript
-colors: {
-  primary: {
-    900: '#your-color',
-  },
-  secondary: {
-    500: '#your-color',
+const destinations = [
+  {
+    id: 11,
+    name: "Nama Destinasi Baru",
+    slug: "slug-destinasi",
+    category: "water", // water | forest | culture
+    location: "Lokasi, Kalimantan Timur",
+    shortDesc: "Deskripsi singkat...",
+    image: "url-gambar",
+    rating: 4.8,
+    reviews: 1000,
+    price: "Mulai Rp 500.000",
+    duration: "2 Hari",
+    highlights: ["Tag1", "Tag2", "Tag3"],
+    featured: true
   }
-}
+];
 ```
+
+### Mengubah Tampilan Section
+Edit file di folder `/src/components/` sesuai section yang ingin diubah.
+
+## 🔧 Tech Stack
+
+- **HTML5** - Struktur semantik
+- **Tailwind CSS** - Styling utility-first
+- **Vanilla JavaScript** - Logic tanpa framework
+- **AOS** - Scroll animations
+- **Unsplash/Mixkit** - Free images & videos
 
 ## 📱 Responsive Breakpoints
 
-- **Mobile**: < 640px
-- **Tablet**: 640px - 1024px
-- **Desktop**: > 1024px
-
-## 🌐 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+| Device | Breakpoint |
+|--------|------------|
+| Mobile | < 640px |
+| Tablet | 640px - 1024px |
+| Desktop | > 1024px |
 
 ## 📄 License
 
-This project is licensed under the MIT License.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📞 Contact
-
-- **Email**: hello@explorekaltim.id
-- **WhatsApp**: +62 541 123 456
-- **Instagram**: @explorekaltim
+MIT License - Feel free to use for personal or commercial projects.
 
 ---
 
-Made with ❤️ in Kalimantan Timur, Indonesia
+Made with ❤️ for Kalimantan Timur Tourism
+

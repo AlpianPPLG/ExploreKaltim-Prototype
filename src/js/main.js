@@ -9,69 +9,53 @@
 // DOM Ready Handler
 // ==========================================
 document.addEventListener('DOMContentLoaded', async () => {
-  // Show page loader
-  showLoader();
-
-  // Fallback: hide loader after 5 seconds regardless of what happens
-  const fallbackTimeout = setTimeout(() => {
-    console.warn('Fallback timeout: hiding loader');
-    hideLoader();
-  }, 5000);
+  console.log('🚀 Initializing Explore Kaltim...');
 
   try {
-    // Check if there are placeholders to load components into
-    const hasPlaceholders = document.getElementById('navbar-placeholder') ||
-                            document.getElementById('hero-placeholder') ||
-                            document.getElementById('footer-placeholder');
+    // Load all components first
+    await loadAllComponents();
 
-    if (hasPlaceholders && typeof initializeComponents === 'function') {
-      // Load components if placeholders exist
-      await initializeComponents();
-    }
+    // Initialize all modules after components are loaded
+    initializeApp();
 
-    // Initialize all modules directly (no need to wait for event)
-    initNavbar();
-    initMobileMenu();
-    initVideoModal();
-    initDestinations();
-    initFilters();
-    initGallery();
-    initTestimonials();
-    initContactForm();
-    initBackToTop();
-    initAnimations();
-    initSmoothScroll();
+    // Hide loader with delay for smooth transition
+    setTimeout(() => hideLoader(), 800);
 
-    // Clear fallback timeout since everything loaded successfully
-    clearTimeout(fallbackTimeout);
-
-    // Hide loader after everything is ready
-    setTimeout(() => hideLoader(), 500);
+    console.log('✅ Explore Kaltim initialized successfully!');
   } catch (error) {
-    console.error('Error initializing app:', error);
-    clearTimeout(fallbackTimeout);
-    // Hide loader even on error to prevent stuck loading
+    console.error('❌ Error initializing app:', error);
+    // Hide loader even on error
     hideLoader();
   }
 });
 
 // ==========================================
-// Page Loader
+// Initialize All App Modules
 // ==========================================
-function showLoader() {
-  const loader = document.getElementById('page-loader');
-  if (loader) {
-    loader.classList.remove('loaded');
-  }
+function initializeApp() {
+  initNavbar();
+  initMobileMenu();
+  initVideoModal();
+  initDestinations();
+  initFilters();
+  initGallery();
+  initTestimonials();
+  initContactForm();
+  initBackToTop();
+  initSmoothScroll();
+  initAnimations();
 }
 
+// ==========================================
+// Page Loader
+// ==========================================
 function hideLoader() {
   const loader = document.getElementById('page-loader');
   if (loader) {
     loader.classList.add('loaded');
     setTimeout(() => {
       loader.style.display = 'none';
-    }, 500);
+    }, 600);
   }
 }
 
@@ -83,27 +67,36 @@ function initNavbar() {
   if (!navbar) return;
 
   let lastScroll = 0;
+  let ticking = false;
 
   window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const currentScroll = window.pageYOffset;
 
-    // Add background on scroll
-    if (currentScroll > 50) {
-      navbar.classList.add('bg-primary-950/95', 'backdrop-blur-lg', 'shadow-lg');
-      navbar.classList.remove('bg-transparent');
-    } else {
-      navbar.classList.remove('bg-primary-950/95', 'backdrop-blur-lg', 'shadow-lg');
-      navbar.classList.add('bg-transparent');
+        // Add background on scroll
+        if (currentScroll > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+
+        // Hide/show navbar on scroll direction (only after 500px)
+        if (currentScroll > 500) {
+          if (currentScroll > lastScroll) {
+            navbar.style.transform = 'translateY(-100%)';
+          } else {
+            navbar.style.transform = 'translateY(0)';
+          }
+        } else {
+          navbar.style.transform = 'translateY(0)';
+        }
+
+        lastScroll = currentScroll;
+        ticking = false;
+      });
+      ticking = true;
     }
-
-    // Hide/show navbar on scroll direction
-    if (currentScroll > lastScroll && currentScroll > 500) {
-      navbar.style.transform = 'translateY(-100%)';
-    } else {
-      navbar.style.transform = 'translateY(0)';
-    }
-
-    lastScroll = currentScroll;
   }, { passive: true });
 }
 
@@ -120,44 +113,40 @@ function initMobileMenu() {
 
   menuBtn.addEventListener('click', () => {
     isOpen = !isOpen;
-
-    if (isOpen) {
-      mobileMenu.classList.remove('translate-x-full');
-      mobileMenu.classList.add('translate-x-0');
-      menuBtn.classList.add('active');
-      document.body.style.overflow = 'hidden';
-
-      // Animate hamburger to X
-      const lines = menuBtn.querySelectorAll('.hamburger-line');
-      lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-      lines[1].style.opacity = '0';
-      lines[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-      lines[2].style.width = '24px';
-    } else {
-      closeMobileMenu();
-    }
+    toggleMobileMenu(isOpen, menuBtn, mobileMenu);
   });
 
   // Close menu when clicking links
   const menuLinks = mobileMenu.querySelectorAll('[data-close-menu]');
   menuLinks.forEach(link => {
     link.addEventListener('click', () => {
-      closeMobileMenu();
+      isOpen = false;
+      toggleMobileMenu(isOpen, menuBtn, mobileMenu);
     });
   });
+}
 
-  function closeMobileMenu() {
-    isOpen = false;
-    mobileMenu.classList.add('translate-x-full');
-    mobileMenu.classList.remove('translate-x-0');
-    menuBtn.classList.remove('active');
+function toggleMobileMenu(isOpen, menuBtn, mobileMenu) {
+  const lines = menuBtn.querySelectorAll('.hamburger-line');
+
+  if (isOpen) {
+    mobileMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Animate hamburger to X
+    lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+    lines[1].style.opacity = '0';
+    lines[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+    lines[2].style.width = '24px';
+  } else {
+    mobileMenu.classList.remove('open');
     document.body.style.overflow = '';
 
-    const lines = menuBtn.querySelectorAll('.hamburger-line');
+    // Reset hamburger
     lines[0].style.transform = '';
     lines[1].style.opacity = '1';
     lines[2].style.transform = '';
-    lines[2].style.width = '16px';
+    lines[2].style.width = '';
   }
 }
 
@@ -172,12 +161,11 @@ function initVideoModal() {
 
   if (!playBtn || !modal) return;
 
-  // Kalimantan Timur tourism video
+  // Sample video URL (replace with actual Kalimantan Timur tourism video)
   const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
 
   playBtn.addEventListener('click', () => {
-    modal.classList.remove('opacity-0', 'invisible');
-    modal.classList.add('opacity-100', 'visible');
+    modal.classList.add('active');
     if (youtubePlayer) {
       youtubePlayer.src = videoUrl;
     }
@@ -185,8 +173,7 @@ function initVideoModal() {
   });
 
   function closeModal() {
-    modal.classList.add('opacity-0', 'invisible');
-    modal.classList.remove('opacity-100', 'visible');
+    modal.classList.remove('active');
     if (youtubePlayer) {
       youtubePlayer.src = '';
     }
@@ -204,7 +191,7 @@ function initVideoModal() {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
       closeModal();
     }
   });
@@ -215,7 +202,7 @@ function initVideoModal() {
 // ==========================================
 function initDestinations() {
   const container = document.getElementById('destinations-grid');
-  if (!container) return;
+  if (!container || typeof destinations === 'undefined') return;
 
   renderDestinations(destinations);
 }
@@ -345,7 +332,7 @@ function getCategoryName(category) {
 // ==========================================
 function initFilters() {
   const filterContainer = document.getElementById('filter-container');
-  if (!filterContainer) return;
+  if (!filterContainer || typeof categories === 'undefined') return;
 
   // Render filter pills
   filterContainer.innerHTML = categories.map(cat => `
@@ -383,12 +370,12 @@ function initFilters() {
 // ==========================================
 function initGallery() {
   const galleryContainer = document.getElementById('gallery-grid');
-  if (!galleryContainer) return;
+  if (!galleryContainer || typeof galleryImages === 'undefined') return;
 
   // Render gallery
   galleryContainer.innerHTML = galleryImages.map((img, index) => `
     <div 
-      class="gallery-item relative overflow-hidden rounded-2xl cursor-pointer group aspect-square"
+      class="gallery-item aspect-square"
       data-aos="zoom-in"
       data-aos-delay="${index * 50}"
       onclick="openLightbox(${img.id})"
@@ -396,33 +383,25 @@ function initGallery() {
       <img 
         src="${img.src}" 
         alt="${img.alt}" 
-        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
         loading="lazy"
       >
-      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div class="absolute bottom-4 left-4 right-4">
-          <p class="text-white font-display font-medium">${img.alt}</p>
-        </div>
-      </div>
-      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <span class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center">
-          <svg class="w-6 h-6 text-primary-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-          </svg>
-        </span>
+      <div class="gallery-overlay">
+        <p class="text-white font-display font-medium text-sm">${img.alt}</p>
       </div>
     </div>
   `).join('');
 }
 
-// Lightbox functionality
+// ==========================================
+// Lightbox Functionality
+// ==========================================
 let currentLightboxIndex = 0;
 
 function openLightbox(id) {
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightbox-image');
 
-  if (!lightbox || !lightboxImage) return;
+  if (!lightbox || !lightboxImage || typeof galleryImages === 'undefined') return;
 
   const imageIndex = galleryImages.findIndex(img => img.id === id);
   if (imageIndex === -1) return;
@@ -447,7 +426,7 @@ function closeLightbox() {
 
 function navigateLightbox(direction) {
   const lightboxImage = document.getElementById('lightbox-image');
-  if (!lightboxImage) return;
+  if (!lightboxImage || typeof galleryImages === 'undefined') return;
 
   currentLightboxIndex += direction;
 
@@ -462,6 +441,20 @@ function navigateLightbox(direction) {
   lightboxImage.alt = image.alt;
 }
 
+// Close lightbox with Escape key
+document.addEventListener('keydown', (e) => {
+  const lightbox = document.getElementById('lightbox');
+  if (!lightbox) return;
+
+  if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+    closeLightbox();
+  } else if (e.key === 'ArrowLeft' && lightbox.classList.contains('active')) {
+    navigateLightbox(-1);
+  } else if (e.key === 'ArrowRight' && lightbox.classList.contains('active')) {
+    navigateLightbox(1);
+  }
+});
+
 // Make functions global
 window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
@@ -472,7 +465,7 @@ window.navigateLightbox = navigateLightbox;
 // ==========================================
 function initTestimonials() {
   const container = document.getElementById('testimonials-container');
-  if (!container) return;
+  if (!container || typeof testimonials === 'undefined') return;
 
   container.innerHTML = testimonials.map((t, index) => `
     <div class="testimonial-card" data-aos="fade-up" data-aos-delay="${index * 100}">
@@ -484,7 +477,7 @@ function initTestimonials() {
         `).join('')}
       </div>
       
-      <p class="text-gray-700 mb-6 leading-relaxed italic">
+      <p class="text-gray-700 mb-6 leading-relaxed italic line-clamp-3">
         "${t.text}"
       </p>
       
@@ -538,8 +531,8 @@ function initContactForm() {
       </svg>
       <span>Terkirim!</span>
     `;
-    submitBtn.classList.remove('bg-primary-800', 'hover:bg-primary-700');
-    submitBtn.classList.add('bg-green-600');
+    submitBtn.classList.remove('bg-primary-800');
+    submitBtn.style.background = 'linear-gradient(135deg, #059669, #10b981)';
 
     // Reset form
     form.reset();
@@ -548,8 +541,7 @@ function initContactForm() {
     setTimeout(() => {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
-      submitBtn.classList.add('bg-primary-800', 'hover:bg-primary-700');
-      submitBtn.classList.remove('bg-green-600');
+      submitBtn.style.background = '';
     }, 3000);
   });
 }
@@ -563,11 +555,9 @@ function initBackToTop() {
 
   window.addEventListener('scroll', () => {
     if (window.pageYOffset > 500) {
-      backToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
-      backToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
+      backToTopBtn.classList.add('visible');
     } else {
-      backToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
-      backToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
+      backToTopBtn.classList.remove('visible');
     }
   }, { passive: true });
 
@@ -583,19 +573,21 @@ function initBackToTop() {
 // Smooth Scroll for Anchor Links
 // ==========================================
 function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
 
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        e.preventDefault();
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
+    const targetId = link.getAttribute('href');
+    if (targetId === '#') return;
+
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      e.preventDefault();
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   });
 }
+

@@ -5,22 +5,40 @@
  * Script untuk memuat komponen HTML secara modular
  */
 
-// Component loader function
+// Component configuration
+const componentConfig = [
+  { id: 'navbar-placeholder', path: './src/components/navbar.html' },
+  { id: 'hero-placeholder', path: './src/components/hero.html' },
+  { id: 'destinations-placeholder', path: './src/components/destinations.html' },
+  { id: 'experience-placeholder', path: './src/components/experience.html' },
+  { id: 'gallery-placeholder', path: './src/components/gallery.html' },
+  { id: 'testimonials-placeholder', path: './src/components/testimonials.html' },
+  { id: 'contact-placeholder', path: './src/components/contact.html' },
+  { id: 'footer-placeholder', path: './src/components/footer.html' }
+];
+
+// Load a single component
 async function loadComponent(id, path) {
   try {
+    const element = document.getElementById(id);
+    if (!element) {
+      console.warn(`Element with id "${id}" not found`);
+      return null;
+    }
+
     const response = await fetch(path);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+
     const html = await response.text();
-    const element = document.getElementById(id);
-    if (element) {
-      element.innerHTML = html;
-      // Dispatch custom event when component is loaded
-      document.dispatchEvent(new CustomEvent('componentLoaded', {
-        detail: { id, path }
-      }));
-    }
+    element.innerHTML = html;
+
+    // Dispatch custom event when component is loaded
+    document.dispatchEvent(new CustomEvent('componentLoaded', {
+      detail: { id, path }
+    }));
+
     return html;
   } catch (error) {
     console.error(`Error loading component ${path}:`, error);
@@ -28,34 +46,36 @@ async function loadComponent(id, path) {
   }
 }
 
-// Load multiple components in parallel
-async function loadComponents(components) {
-  const promises = components.map(({ id, path }) => loadComponent(id, path));
-  return Promise.all(promises);
-}
+// Load all components sequentially (to maintain order)
+async function loadAllComponents() {
+  let loadedCount = 0;
+  const totalComponents = componentConfig.length;
 
-// Initialize all page components
-async function initializeComponents() {
-  const components = [
-    { id: 'navbar-placeholder', path: './src/components/navbar.html' },
-    { id: 'hero-placeholder', path: './src/components/hero.html' },
-    { id: 'footer-placeholder', path: './src/components/footer.html' }
-  ];
+  for (const { id, path } of componentConfig) {
+    await loadComponent(id, path);
+    loadedCount++;
 
-  // Filter to only load components that have existing placeholders
-  const existingComponents = components.filter(({ id }) => document.getElementById(id) !== null);
-
-  if (existingComponents.length > 0) {
-    await loadComponents(existingComponents);
+    // Update progress (optional - can be used for loader)
+    const progress = (loadedCount / totalComponents) * 100;
+    updateLoaderProgress(progress);
   }
 
   // Dispatch event when all components are loaded
   document.dispatchEvent(new CustomEvent('allComponentsLoaded'));
+  return true;
 }
 
-// Export functions for use in other scripts
-if (typeof window !== 'undefined') {
-  window.loadComponent = loadComponent;
-  window.loadComponents = loadComponents;
-  window.initializeComponents = initializeComponents;
+// Update loader progress bar
+function updateLoaderProgress(progress) {
+  const progressBar = document.querySelector('.loader-progress-bar');
+  if (progressBar) {
+    progressBar.style.width = `${progress}%`;
+    progressBar.style.animation = 'none';
+  }
 }
+
+// Export functions for global access
+window.loadComponent = loadComponent;
+window.loadAllComponents = loadAllComponents;
+window.componentConfig = componentConfig;
+

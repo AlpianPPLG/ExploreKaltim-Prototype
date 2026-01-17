@@ -22,17 +22,23 @@ function initAOS() {
 // Parallax effect for background elements
 function initParallax() {
   const parallaxElements = document.querySelectorAll('[data-parallax]');
-
   if (parallaxElements.length === 0) return;
 
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
+  let ticking = false;
 
-    parallaxElements.forEach(element => {
-      const speed = element.dataset.parallax || 0.5;
-      const yPos = -(scrolled * speed);
-      element.style.transform = `translateY(${yPos}px)`;
-    });
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrolled = window.pageYOffset;
+        parallaxElements.forEach(element => {
+          const speed = parseFloat(element.dataset.parallax) || 0.5;
+          const yPos = -(scrolled * speed);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
   }, { passive: true });
 }
 
@@ -45,18 +51,25 @@ function animateCounter(element, target, duration = 2000) {
   const timer = setInterval(() => {
     current += increment;
     if (current >= target) {
-      element.textContent = target.toLocaleString();
+      element.textContent = formatNumber(target);
       clearInterval(timer);
     } else {
-      element.textContent = Math.floor(current).toLocaleString();
+      element.textContent = formatNumber(Math.floor(current));
     }
   }, 16);
+}
+
+// Format number with suffix
+function formatNumber(num) {
+  if (num >= 10000) {
+    return (num / 1000).toFixed(0) + 'K+';
+  }
+  return num.toLocaleString() + (num >= 100 ? '+' : '');
 }
 
 // Initialize counter animations when elements are in view
 function initCounterAnimations() {
   const counters = document.querySelectorAll('[data-counter]');
-
   if (counters.length === 0) return;
 
   const observer = new IntersectionObserver((entries) => {
@@ -75,7 +88,6 @@ function initCounterAnimations() {
 // Smooth reveal animation for elements
 function initRevealAnimations() {
   const revealElements = document.querySelectorAll('[data-reveal]');
-
   if (revealElements.length === 0) return;
 
   const observer = new IntersectionObserver((entries) => {
@@ -139,6 +151,21 @@ function typeText(element, text, speed = 50) {
   });
 }
 
+// Fade in on scroll
+function initFadeInOnScroll() {
+  const fadeElements = document.querySelectorAll('.fade-in-scroll');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  fadeElements.forEach(el => observer.observe(el));
+}
+
 // Initialize all animations
 function initAnimations() {
   initAOS();
@@ -147,11 +174,14 @@ function initAnimations() {
   initRevealAnimations();
   initStaggeredAnimations();
   initMagneticButtons();
+  initFadeInOnScroll();
 }
 
 // Export functions
 if (typeof window !== 'undefined') {
   window.initAnimations = initAnimations;
+  window.initAOS = initAOS;
   window.animateCounter = animateCounter;
   window.typeText = typeText;
 }
+
