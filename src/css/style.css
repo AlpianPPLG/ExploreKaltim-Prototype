@@ -327,10 +327,26 @@ h6 {
 .hero-section {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding-top: 64px; /* Account for navbar on mobile */
+  padding-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .hero-section {
+    padding-top: 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-section {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 .hero-video {
@@ -818,56 +834,74 @@ h6 {
     padding-right: 1rem;
   }
 
+  .hero-section {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-top: 0;
+    padding-bottom: 1rem;
+  }
+
   .hero-content {
     padding: 0 1rem;
+    padding-top: 1rem;
   }
 
   .hero-content h1 {
-    font-size: 2.25rem !important;
+    font-size: 2rem !important;
     line-height: 1.2;
+    margin-bottom: 1rem !important;
   }
 
   .hero-content p {
-    font-size: 0.95rem !important;
-    line-height: 1.6;
+    font-size: 0.875rem !important;
+    line-height: 1.5;
+    margin-bottom: 1.5rem !important;
   }
 
   .btn-primary,
   .btn-secondary {
-    padding: 0.875rem 1.5rem;
-    font-size: 0.875rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.8rem;
   }
 
   .btn-secondary span:first-child {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
   }
 
   /* Stats Grid Mobile */
   .hero-content .grid {
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .hero-content .grid > div {
-    padding: 0.875rem;
+    padding: 0.625rem;
   }
 
+  .hero-content .grid .text-2xl,
   .hero-content .grid .text-3xl {
-    font-size: 1.5rem !important;
+    font-size: 1.25rem !important;
   }
 
+  .hero-content .grid .text-xs,
   .hero-content .grid .text-sm {
-    font-size: 0.75rem;
+    font-size: 0.65rem;
+  }
+
+  /* CTA Buttons */
+  .hero-content .flex.flex-col {
+    gap: 0.75rem;
+    margin-bottom: 1rem !important;
   }
 
   /* Mobile Menu Fixes */
   .mobile-menu {
-    top: 70px;
+    top: 64px;
   }
 
   #mobile-menu-btn {
-    width: 2.75rem;
-    height: 2.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   .hamburger-line {
