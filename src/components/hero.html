@@ -14,7 +14,10 @@
       poster="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=1920&q=80"
       class="hero-video"
     >
-      <source src="https://assets.mixkit.co/videos/preview/mixkit-tropical-island-seen-from-the-water-1175-large.mp4" type="video/mp4">
+      <source
+        src="https://assets.mixkit.co/videos/preview/mixkit-tropical-island-seen-from-the-water-1175-large.mp4"
+        type="video/mp4"
+      />
     </video>
     <!-- Overlay -->
     <div class="hero-overlay"></div>
@@ -23,43 +26,83 @@
   </div>
 
   <!-- Floating Decorative Elements -->
-  <div class="absolute top-1/4 left-10 w-24 h-24 rounded-full bg-secondary-400/20 blur-2xl float-element hidden lg:block"></div>
-  <div class="absolute bottom-1/4 right-10 w-32 h-32 rounded-full bg-primary-400/20 blur-2xl float-element-delayed hidden lg:block"></div>
-  <div class="absolute top-1/3 right-1/4 w-16 h-16 rounded-full bg-secondary-300/10 blur-xl float-element hidden lg:block"></div>
+  <div
+    class="absolute top-1/4 left-10 w-24 h-24 rounded-full bg-secondary-400/20 blur-2xl float-element hidden lg:block"
+  ></div>
+  <div
+    class="absolute bottom-1/4 right-10 w-32 h-32 rounded-full bg-primary-400/20 blur-2xl float-element-delayed hidden lg:block"
+  ></div>
+  <div
+    class="absolute top-1/3 right-1/4 w-16 h-16 rounded-full bg-secondary-300/10 blur-xl float-element hidden lg:block"
+  ></div>
 
   <!-- Hero Content -->
-  <div class="hero-content container mx-auto px-4 lg:px-8">
+  <div
+    class="hero-content container mx-auto px-4 lg:px-8 pt-20 sm:pt-24 lg:pt-0"
+  >
     <div class="max-w-5xl mx-auto">
-
       <!-- Badge -->
-      <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8" data-aos="fade-down" data-aos-delay="100">
-        <span class="w-2.5 h-2.5 rounded-full bg-secondary-400 animate-pulse"></span>
-        <span class="text-white/90 text-sm font-display font-medium">Destinasi Wisata Terbaik 2025</span>
+      <div
+        class="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 sm:mb-8"
+        data-aos="fade-down"
+        data-aos-delay="100"
+      >
+        <span
+          class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-secondary-400 animate-pulse"
+        ></span>
+        <span class="text-white/90 text-xs sm:text-sm font-display font-medium"
+          >Destinasi Wisata Terbaik 2025</span
+        >
       </div>
 
       <!-- Main Headline -->
-      <h1 class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold text-white leading-tight mb-8" data-aos="fade-up" data-aos-delay="200">
+      <h1
+        class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold text-white leading-tight mb-6 sm:mb-8"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
         Jelajahi Keajaiban
         <span class="block text-gradient-light">Kalimantan Timur</span>
       </h1>
 
       <!-- Subheadline -->
-      <p class="text-lg md:text-xl lg:text-2xl text-white/85 font-body max-w-3xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="300">
-        Temukan surga tersembunyi di Borneo — dari kepulauan Derawan yang memukau hingga hutan hujan purba yang misterius
+      <p
+        class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/85 font-body max-w-3xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2"
+        data-aos="fade-up"
+        data-aos-delay="300"
+      >
+        Temukan surga tersembunyi di Borneo — dari kepulauan Derawan yang
+        memukau hingga hutan hujan purba yang misterius
       </p>
 
       <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16" data-aos="fade-up" data-aos-delay="400">
+      <div
+        class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+        data-aos="fade-up"
+        data-aos-delay="400"
+      >
         <a href="#destinations" class="btn-primary group">
           <span>Jelajahi Destinasi</span>
-          <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          <svg
+            class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
           </svg>
         </a>
         <button id="play-video-btn" class="btn-secondary group">
-          <span class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-primary-900 transition-all pulse-glow">
+          <span
+            class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-primary-900 transition-all pulse-glow"
+          >
             <svg class="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"/>
+              <path d="M8 5v14l11-7z" />
             </svg>
           </span>
           <span>Tonton Video</span>
@@ -67,22 +110,58 @@
       </div>
 
       <!-- Stats Preview -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="500">
-        <div class="text-center p-5 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors">
-          <div class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-1">100+</div>
-          <div class="text-white/60 text-sm font-display">Spot Diving</div>
+      <div
+        class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-4xl mx-auto"
+        data-aos="fade-up"
+        data-aos-delay="500"
+      >
+        <div
+          class="text-center p-3 sm:p-5 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors"
+        >
+          <div
+            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-1"
+          >
+            100+
+          </div>
+          <div class="text-white/60 text-xs sm:text-sm font-display">
+            Spot Diving
+          </div>
         </div>
-        <div class="text-center p-5 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors">
-          <div class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-1">50+</div>
-          <div class="text-white/60 text-sm font-display">Pulau Eksotis</div>
+        <div
+          class="text-center p-3 sm:p-5 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors"
+        >
+          <div
+            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-1"
+          >
+            50+
+          </div>
+          <div class="text-white/60 text-xs sm:text-sm font-display">
+            Pulau Eksotis
+          </div>
         </div>
-        <div class="text-center p-5 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors">
-          <div class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-1">5</div>
-          <div class="text-white/60 text-sm font-display">Taman Nasional</div>
+        <div
+          class="text-center p-3 sm:p-5 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors"
+        >
+          <div
+            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-1"
+          >
+            5
+          </div>
+          <div class="text-white/60 text-xs sm:text-sm font-display">
+            Taman Nasional
+          </div>
         </div>
-        <div class="text-center p-5 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors">
-          <div class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-1">10K+</div>
-          <div class="text-white/60 text-sm font-display">Happy Travelers</div>
+        <div
+          class="text-center p-3 sm:p-5 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors"
+        >
+          <div
+            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-1"
+          >
+            10K+
+          </div>
+          <div class="text-white/60 text-xs sm:text-sm font-display">
+            Happy Travelers
+          </div>
         </div>
       </div>
     </div>
@@ -90,9 +169,17 @@
 
   <!-- Wave Separator -->
   <div class="wave-separator">
-    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" preserveAspectRatio="none">
-      <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f5f5f4"/>
+    <svg
+      viewBox="0 0 1440 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-full h-auto"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+        fill="#f5f5f4"
+      />
     </svg>
   </div>
 </section>
-

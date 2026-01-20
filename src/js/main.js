@@ -8,8 +8,8 @@
 // ==========================================
 // DOM Ready Handler
 // ==========================================
-document.addEventListener('DOMContentLoaded', async () => {
-  console.log('🚀 Initializing Explore Kaltim...');
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("🚀 Initializing Explore Kaltim...");
 
   try {
     // Load all components first
@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Hide loader with delay for smooth transition
     setTimeout(() => hideLoader(), 800);
 
-    console.log('✅ Explore Kaltim initialized successfully!');
+    console.log("✅ Explore Kaltim initialized successfully!");
   } catch (error) {
-    console.error('❌ Error initializing app:', error);
+    console.error("❌ Error initializing app:", error);
     // Hide loader even on error
     hideLoader();
   }
@@ -50,11 +50,11 @@ function initializeApp() {
 // Page Loader
 // ==========================================
 function hideLoader() {
-  const loader = document.getElementById('page-loader');
+  const loader = document.getElementById("page-loader");
   if (loader) {
-    loader.classList.add('loaded');
+    loader.classList.add("loaded");
     setTimeout(() => {
-      loader.style.display = 'none';
+      loader.style.display = "none";
     }, 600);
   }
 }
@@ -63,63 +63,67 @@ function hideLoader() {
 // Navbar Functionality
 // ==========================================
 function initNavbar() {
-  const navbar = document.getElementById('navbar');
+  const navbar = document.getElementById("navbar");
   if (!navbar) return;
 
   let lastScroll = 0;
   let ticking = false;
 
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        const currentScroll = window.pageYOffset;
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScroll = window.pageYOffset;
 
-        // Add background on scroll
-        if (currentScroll > 50) {
-          navbar.classList.add('scrolled');
-        } else {
-          navbar.classList.remove('scrolled');
-        }
-
-        // Hide/show navbar on scroll direction (only after 500px)
-        if (currentScroll > 500) {
-          if (currentScroll > lastScroll) {
-            navbar.style.transform = 'translateY(-100%)';
+          // Add background on scroll
+          if (currentScroll > 50) {
+            navbar.classList.add("scrolled");
           } else {
-            navbar.style.transform = 'translateY(0)';
+            navbar.classList.remove("scrolled");
           }
-        } else {
-          navbar.style.transform = 'translateY(0)';
-        }
 
-        lastScroll = currentScroll;
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
+          // Hide/show navbar on scroll direction (only after 500px)
+          if (currentScroll > 500) {
+            if (currentScroll > lastScroll) {
+              navbar.style.transform = "translateY(-100%)";
+            } else {
+              navbar.style.transform = "translateY(0)";
+            }
+          } else {
+            navbar.style.transform = "translateY(0)";
+          }
+
+          lastScroll = currentScroll;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    },
+    { passive: true },
+  );
 }
 
 // ==========================================
 // Mobile Menu
 // ==========================================
 function initMobileMenu() {
-  const menuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
 
   if (!menuBtn || !mobileMenu) return;
 
   let isOpen = false;
 
-  menuBtn.addEventListener('click', () => {
+  menuBtn.addEventListener("click", () => {
     isOpen = !isOpen;
     toggleMobileMenu(isOpen, menuBtn, mobileMenu);
   });
 
   // Close menu when clicking links
-  const menuLinks = mobileMenu.querySelectorAll('[data-close-menu]');
-  menuLinks.forEach(link => {
-    link.addEventListener('click', () => {
+  const menuLinks = mobileMenu.querySelectorAll("[data-close-menu]");
+  menuLinks.forEach((link) => {
+    link.addEventListener("click", () => {
       isOpen = false;
       toggleMobileMenu(isOpen, menuBtn, mobileMenu);
     });
@@ -127,26 +131,35 @@ function initMobileMenu() {
 }
 
 function toggleMobileMenu(isOpen, menuBtn, mobileMenu) {
-  const lines = menuBtn.querySelectorAll('.hamburger-line');
+  const lines = menuBtn.querySelectorAll(".hamburger-line");
+  const isMobile = window.innerWidth <= 480;
+  const translateY = isMobile ? "6px" : "8px";
+  const lineWidth = isMobile ? "20px" : "24px";
 
   if (isOpen) {
-    mobileMenu.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    mobileMenu.classList.add("open");
+    document.body.style.overflow = "hidden";
 
-    // Animate hamburger to X
-    lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-    lines[1].style.opacity = '0';
-    lines[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-    lines[2].style.width = '24px';
+    // Animate hamburger to X - centered and properly aligned
+    lines[0].style.transform = `translateY(${translateY}) rotate(45deg)`;
+    lines[0].style.width = lineWidth;
+    lines[1].style.opacity = "0";
+    lines[1].style.transform = "scaleX(0)";
+    lines[2].style.transform = `translateY(-${translateY}) rotate(-45deg)`;
+    lines[2].style.width = lineWidth;
+    lines[2].style.marginLeft = "0";
   } else {
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
+    mobileMenu.classList.remove("open");
+    document.body.style.overflow = "";
 
     // Reset hamburger
-    lines[0].style.transform = '';
-    lines[1].style.opacity = '1';
-    lines[2].style.transform = '';
-    lines[2].style.width = '';
+    lines[0].style.transform = "";
+    lines[0].style.width = "";
+    lines[1].style.opacity = "1";
+    lines[1].style.transform = "";
+    lines[2].style.transform = "";
+    lines[2].style.width = "";
+    lines[2].style.marginLeft = "";
   }
 }
 
@@ -154,44 +167,44 @@ function toggleMobileMenu(isOpen, menuBtn, mobileMenu) {
 // Video Modal
 // ==========================================
 function initVideoModal() {
-  const playBtn = document.getElementById('play-video-btn');
-  const modal = document.getElementById('video-modal');
-  const closeBtn = document.getElementById('close-video-modal');
-  const youtubePlayer = document.getElementById('youtube-player');
+  const playBtn = document.getElementById("play-video-btn");
+  const modal = document.getElementById("video-modal");
+  const closeBtn = document.getElementById("close-video-modal");
+  const youtubePlayer = document.getElementById("youtube-player");
 
   if (!playBtn || !modal) return;
 
   // Sample video URL (replace with actual Kalimantan Timur tourism video)
-  const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+  const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
 
-  playBtn.addEventListener('click', () => {
-    modal.classList.add('active');
+  playBtn.addEventListener("click", () => {
+    modal.classList.add("active");
     if (youtubePlayer) {
       youtubePlayer.src = videoUrl;
     }
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   });
 
   function closeModal() {
-    modal.classList.remove('active');
+    modal.classList.remove("active");
     if (youtubePlayer) {
-      youtubePlayer.src = '';
+      youtubePlayer.src = "";
     }
-    document.body.style.overflow = '';
+    document.body.style.overflow = "";
   }
 
   if (closeBtn) {
-    closeBtn.addEventListener('click', closeModal);
+    closeBtn.addEventListener("click", closeModal);
   }
 
-  modal.addEventListener('click', (e) => {
+  modal.addEventListener("click", (e) => {
     if (e.target === modal) {
       closeModal();
     }
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("active")) {
       closeModal();
     }
   });
@@ -201,18 +214,20 @@ function initVideoModal() {
 // Destinations Section
 // ==========================================
 function initDestinations() {
-  const container = document.getElementById('destinations-grid');
-  if (!container || typeof destinations === 'undefined') return;
+  const container = document.getElementById("destinations-grid");
+  if (!container || typeof destinations === "undefined") return;
 
   renderDestinations(destinations);
 }
 
 function renderDestinations(items, animate = true) {
-  const container = document.getElementById('destinations-grid');
+  const container = document.getElementById("destinations-grid");
   if (!container) return;
 
-  container.innerHTML = items.map((dest, index) => `
-    <article class="destination-card group" data-aos="${animate ? 'fade-up' : ''}" data-aos-delay="${index * 100}" data-category="${dest.category}">
+  container.innerHTML = items
+    .map(
+      (dest, index) => `
+    <article class="destination-card group" data-aos="${animate ? "fade-up" : ""}" data-aos-delay="${index * 100}" data-category="${dest.category}">
       <div class="relative overflow-hidden">
         <img 
           src="${dest.image}" 
@@ -280,11 +295,16 @@ function renderDestinations(items, animate = true) {
 
         <!-- Highlights -->
         <div class="flex flex-wrap gap-2 mb-5">
-          ${dest.highlights.slice(0, 3).map(h => `
+          ${dest.highlights
+            .slice(0, 3)
+            .map(
+              (h) => `
             <span class="px-2.5 py-1 rounded-full bg-primary-50 text-primary-700 text-xs font-medium">
               ${h}
             </span>
-          `).join('')}
+          `,
+            )
+            .join("")}
         </div>
 
         <div class="flex items-center justify-between pt-4 border-t border-gray-100">
@@ -301,64 +321,71 @@ function renderDestinations(items, animate = true) {
         </div>
       </div>
     </article>
-  `).join('');
+  `,
+    )
+    .join("");
 
   // Refresh AOS after rendering
-  if (typeof AOS !== 'undefined') {
+  if (typeof AOS !== "undefined") {
     AOS.refresh();
   }
 }
 
 function getCategoryIcon(category) {
   const icons = {
-    water: '🌊',
-    forest: '🌲',
-    culture: '🏛️'
+    water: "🌊",
+    forest: "🌲",
+    culture: "🏛️",
   };
-  return icons[category] || '🌏';
+  return icons[category] || "🌏";
 }
 
 function getCategoryName(category) {
   const names = {
-    water: 'Wisata Air',
-    forest: 'Hutan & Alam',
-    culture: 'Budaya'
+    water: "Wisata Air",
+    forest: "Hutan & Alam",
+    culture: "Budaya",
   };
-  return names[category] || 'Destinasi';
+  return names[category] || "Destinasi";
 }
 
 // ==========================================
 // Category Filters
 // ==========================================
 function initFilters() {
-  const filterContainer = document.getElementById('filter-container');
-  if (!filterContainer || typeof categories === 'undefined') return;
+  const filterContainer = document.getElementById("filter-container");
+  if (!filterContainer || typeof categories === "undefined") return;
 
   // Render filter pills
-  filterContainer.innerHTML = categories.map(cat => `
+  filterContainer.innerHTML = categories
+    .map(
+      (cat) => `
     <button 
-      class="filter-pill ${cat.id === 'all' ? 'active' : ''}" 
+      class="filter-pill ${cat.id === "all" ? "active" : ""}" 
       data-filter="${cat.id}"
     >
       <span class="mr-1">${cat.icon}</span>
       ${cat.name}
     </button>
-  `).join('');
+  `,
+    )
+    .join("");
 
   // Add filter functionality
-  const filterBtns = filterContainer.querySelectorAll('.filter-pill');
+  const filterBtns = filterContainer.querySelectorAll(".filter-pill");
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
       // Update active state
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
 
       // Filter destinations
       const filter = btn.dataset.filter;
-      const filtered = filter === 'all'
-        ? destinations
-        : destinations.filter(d => d.category === filter);
+      const filtered =
+        filter === "all"
+          ? destinations
+          : destinations.filter((d) => d.category === filter);
 
       renderDestinations(filtered, false);
     });
@@ -369,11 +396,13 @@ function initFilters() {
 // Gallery Section
 // ==========================================
 function initGallery() {
-  const galleryContainer = document.getElementById('gallery-grid');
-  if (!galleryContainer || typeof galleryImages === 'undefined') return;
+  const galleryContainer = document.getElementById("gallery-grid");
+  if (!galleryContainer || typeof galleryImages === "undefined") return;
 
   // Render gallery
-  galleryContainer.innerHTML = galleryImages.map((img, index) => `
+  galleryContainer.innerHTML = galleryImages
+    .map(
+      (img, index) => `
     <div 
       class="gallery-item aspect-square"
       data-aos="zoom-in"
@@ -389,7 +418,9 @@ function initGallery() {
         <p class="text-white font-display font-medium text-sm">${img.alt}</p>
       </div>
     </div>
-  `).join('');
+  `,
+    )
+    .join("");
 }
 
 // ==========================================
@@ -398,12 +429,13 @@ function initGallery() {
 let currentLightboxIndex = 0;
 
 function openLightbox(id) {
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImage = document.getElementById('lightbox-image');
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImage = document.getElementById("lightbox-image");
 
-  if (!lightbox || !lightboxImage || typeof galleryImages === 'undefined') return;
+  if (!lightbox || !lightboxImage || typeof galleryImages === "undefined")
+    return;
 
-  const imageIndex = galleryImages.findIndex(img => img.id === id);
+  const imageIndex = galleryImages.findIndex((img) => img.id === id);
   if (imageIndex === -1) return;
 
   currentLightboxIndex = imageIndex;
@@ -412,21 +444,21 @@ function openLightbox(id) {
   lightboxImage.src = image.src;
   lightboxImage.alt = image.alt;
 
-  lightbox.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  lightbox.classList.add("active");
+  document.body.style.overflow = "hidden";
 }
 
 function closeLightbox() {
-  const lightbox = document.getElementById('lightbox');
+  const lightbox = document.getElementById("lightbox");
   if (!lightbox) return;
 
-  lightbox.classList.remove('active');
-  document.body.style.overflow = '';
+  lightbox.classList.remove("active");
+  document.body.style.overflow = "";
 }
 
 function navigateLightbox(direction) {
-  const lightboxImage = document.getElementById('lightbox-image');
-  if (!lightboxImage || typeof galleryImages === 'undefined') return;
+  const lightboxImage = document.getElementById("lightbox-image");
+  if (!lightboxImage || typeof galleryImages === "undefined") return;
 
   currentLightboxIndex += direction;
 
@@ -442,15 +474,15 @@ function navigateLightbox(direction) {
 }
 
 // Close lightbox with Escape key
-document.addEventListener('keydown', (e) => {
-  const lightbox = document.getElementById('lightbox');
+document.addEventListener("keydown", (e) => {
+  const lightbox = document.getElementById("lightbox");
   if (!lightbox) return;
 
-  if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+  if (e.key === "Escape" && lightbox.classList.contains("active")) {
     closeLightbox();
-  } else if (e.key === 'ArrowLeft' && lightbox.classList.contains('active')) {
+  } else if (e.key === "ArrowLeft" && lightbox.classList.contains("active")) {
     navigateLightbox(-1);
-  } else if (e.key === 'ArrowRight' && lightbox.classList.contains('active')) {
+  } else if (e.key === "ArrowRight" && lightbox.classList.contains("active")) {
     navigateLightbox(1);
   }
 });
@@ -464,17 +496,24 @@ window.navigateLightbox = navigateLightbox;
 // Testimonials Section
 // ==========================================
 function initTestimonials() {
-  const container = document.getElementById('testimonials-container');
-  if (!container || typeof testimonials === 'undefined') return;
+  const container = document.getElementById("testimonials-container");
+  if (!container || typeof testimonials === "undefined") return;
 
-  container.innerHTML = testimonials.map((t, index) => `
+  container.innerHTML = testimonials
+    .map(
+      (t, index) => `
     <div class="testimonial-card" data-aos="fade-up" data-aos-delay="${index * 100}">
       <div class="flex items-center gap-1 mb-4">
-        ${Array(t.rating).fill().map(() => `
+        ${Array(t.rating)
+          .fill()
+          .map(
+            () => `
           <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
           </svg>
-        `).join('')}
+        `,
+          )
+          .join("")}
       </div>
       
       <p class="text-gray-700 mb-6 leading-relaxed italic line-clamp-3">
@@ -495,17 +534,19 @@ function initTestimonials() {
         </div>
       </div>
     </div>
-  `).join('');
+  `,
+    )
+    .join("");
 }
 
 // ==========================================
 // Contact Form
 // ==========================================
 function initContactForm() {
-  const form = document.getElementById('contact-form');
+  const form = document.getElementById("contact-form");
   if (!form) return;
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const submitBtn = form.querySelector('button[type="submit"]');
@@ -522,7 +563,7 @@ function initContactForm() {
     `;
 
     // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Show success message
     submitBtn.innerHTML = `
@@ -531,8 +572,8 @@ function initContactForm() {
       </svg>
       <span>Terkirim!</span>
     `;
-    submitBtn.classList.remove('bg-primary-800');
-    submitBtn.style.background = 'linear-gradient(135deg, #059669, #10b981)';
+    submitBtn.classList.remove("bg-primary-800");
+    submitBtn.style.background = "linear-gradient(135deg, #059669, #10b981)";
 
     // Reset form
     form.reset();
@@ -541,7 +582,7 @@ function initContactForm() {
     setTimeout(() => {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
-      submitBtn.style.background = '';
+      submitBtn.style.background = "";
     }, 3000);
   });
 }
@@ -550,21 +591,25 @@ function initContactForm() {
 // Back to Top Button
 // ==========================================
 function initBackToTop() {
-  const backToTopBtn = document.getElementById('back-to-top');
+  const backToTopBtn = document.getElementById("back-to-top");
   if (!backToTopBtn) return;
 
-  window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 500) {
-      backToTopBtn.classList.add('visible');
-    } else {
-      backToTopBtn.classList.remove('visible');
-    }
-  }, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (window.pageYOffset > 500) {
+        backToTopBtn.classList.add("visible");
+      } else {
+        backToTopBtn.classList.remove("visible");
+      }
+    },
+    { passive: true },
+  );
 
-  backToTopBtn.addEventListener('click', () => {
+  backToTopBtn.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   });
 }
@@ -573,21 +618,20 @@ function initBackToTop() {
 // Smooth Scroll for Anchor Links
 // ==========================================
 function initSmoothScroll() {
-  document.addEventListener('click', (e) => {
+  document.addEventListener("click", (e) => {
     const link = e.target.closest('a[href^="#"]');
     if (!link) return;
 
-    const targetId = link.getAttribute('href');
-    if (targetId === '#') return;
+    const targetId = link.getAttribute("href");
+    if (targetId === "#") return;
 
     const targetElement = document.querySelector(targetId);
     if (targetElement) {
       e.preventDefault();
       targetElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+        behavior: "smooth",
+        block: "start",
       });
     }
   });
 }
-

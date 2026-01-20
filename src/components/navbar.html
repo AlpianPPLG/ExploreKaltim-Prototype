@@ -4,15 +4,15 @@
      ========================================== -->
 
 <nav id="navbar" class="navbar">
-  <div class="container mx-auto px-4 lg:px-8">
-    <div class="flex items-center justify-between h-20">
+  <div class="container mx-auto px-3 sm:px-4 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
       <!-- Logo -->
-      <a href="#home" class="flex items-center gap-3 group">
+      <a href="#home" class="flex items-center gap-2 sm:gap-3 group">
         <div
-          class="w-11 h-11 rounded-xl bg-gradient-to-br from-secondary-400 to-primary-600 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300 shadow-lg"
+          class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-secondary-400 to-primary-600 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300 shadow-lg"
         >
           <svg
-            class="w-6 h-6 text-white"
+            class="w-5 h-5 sm:w-6 sm:h-6 text-white"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -25,7 +25,7 @@
             />
           </svg>
         </div>
-        <span class="text-xl font-heading font-bold text-white">
+        <span class="text-lg sm:text-xl font-heading font-bold text-white">
           Explore<span class="text-secondary-400">Kaltim</span>
         </span>
       </a>
@@ -65,19 +65,19 @@
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-btn"
-        class="lg:hidden w-11 h-11 flex flex-col items-center justify-center gap-1.5 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors"
+        class="lg:hidden w-10 h-10 sm:w-11 sm:h-11 flex flex-col items-center justify-center gap-1 sm:gap-1.5 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors"
         aria-label="Toggle Menu"
       >
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
-        <span class="hamburger-line w-4 ml-auto mr-1"></span>
+        <span class="hamburger-line hamburger-line-short"></span>
       </button>
     </div>
   </div>
 
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="mobile-menu lg:hidden">
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-6 sm:py-8">
       <div class="flex flex-col gap-2">
         <a
           href="#home"

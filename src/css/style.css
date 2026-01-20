@@ -287,12 +287,19 @@ h6 {
 .mobile-menu {
   position: fixed;
   inset: 0;
-  top: 80px;
+  top: 64px;
   background: #ffffff;
   backdrop-filter: blur(20px);
   transform: translateX(100%);
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 40;
+  overflow-y: auto;
+}
+
+@media (min-width: 640px) {
+  .mobile-menu {
+    top: 80px;
+  }
 }
 
 .mobile-menu.open {
@@ -306,7 +313,12 @@ h6 {
   height: 2px;
   background: white;
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center center;
+}
+
+.hamburger-line-short {
+  width: 16px;
 }
 
 /* ==========================================
@@ -790,6 +802,95 @@ h6 {
 /* ==========================================
    RESPONSIVE ADJUSTMENTS
    ========================================== */
+
+/* Small Mobile Devices (320px - 480px) */
+@media (max-width: 480px) {
+  html {
+    scroll-padding-top: 70px;
+  }
+
+  .navbar {
+    padding: 0;
+  }
+
+  .navbar .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero-content {
+    padding: 0 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.25rem !important;
+    line-height: 1.2;
+  }
+
+  .hero-content p {
+    font-size: 0.95rem !important;
+    line-height: 1.6;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-secondary span:first-child {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  /* Stats Grid Mobile */
+  .hero-content .grid {
+    gap: 0.75rem;
+  }
+
+  .hero-content .grid > div {
+    padding: 0.875rem;
+  }
+
+  .hero-content .grid .text-3xl {
+    font-size: 1.5rem !important;
+  }
+
+  .hero-content .grid .text-sm {
+    font-size: 0.75rem;
+  }
+
+  /* Mobile Menu Fixes */
+  .mobile-menu {
+    top: 70px;
+  }
+
+  #mobile-menu-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .hamburger-line {
+    width: 20px;
+  }
+
+  .hamburger-line-short {
+    width: 14px;
+  }
+}
+
+/* Medium Mobile Devices (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .hero-content h1 {
+    font-size: 2.75rem !important;
+  }
+
+  .hero-content p {
+    font-size: 1rem !important;
+  }
+}
+
+/* Tablet and larger mobile (768px) */
 @media (max-width: 768px) {
   .lightbox-nav {
     width: 40px;
@@ -809,6 +910,13 @@ h6 {
     right: 1rem;
     width: 48px;
     height: 48px;
+  }
+}
+
+/* Large screens (1024px+) */
+@media (min-width: 1024px) {
+  .mobile-menu {
+    display: none !important;
   }
 }
 
