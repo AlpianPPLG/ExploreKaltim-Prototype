@@ -5,9 +5,8 @@
  * Script untuk memuat komponen HTML secara modular
  */
 
-// Component configuration
+// Component configuration (navbar removed, now using PHP include)
 const componentConfig = [
-  { id: 'navbar-placeholder', path: './src/components/navbar.html' },
   { id: 'hero-placeholder', path: './src/components/hero.html' },
   { id: 'destinations-placeholder', path: './src/components/destinations.html' },
   { id: 'experience-placeholder', path: './src/components/experience.html' },
@@ -26,7 +25,9 @@ async function loadComponent(id, path) {
       return null;
     }
 
-    const response = await fetch(path);
+    // Add cache busting parameter
+    const cacheBuster = `?v=${Date.now()}`;
+    const response = await fetch(path + cacheBuster);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

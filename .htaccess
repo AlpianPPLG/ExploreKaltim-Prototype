@@ -1,0 +1,11 @@
+# Redirect index.html to index.php
+DirectoryIndex index.php index.html
+
+# Redirect old index.html requests to index.php
+RewriteEngine On
+RewriteCond %{THE_REQUEST} /index\.html [NC]
+RewriteRule ^index\.html$ /ExploreKaltim/index.php [R=301,L]
+
+# Enable PHP error reporting (disable in production)
+php_flag display_errors On
+php_value error_reporting E_ALL

@@ -10,9 +10,11 @@ CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
     role ENUM('admin', 'user') DEFAULT 'user',
-    avatar_url VARCHAR(255) DEFAULT NULL
+    avatar_url VARCHAR(255) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- ==========================================
@@ -35,7 +37,7 @@ CREATE TABLE IF NOT EXISTS regencies (
 CREATE TABLE IF NOT EXISTS categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    slug VARCHAR(50) NOT NULL UNIQUE, -- Untuk URL friendly (lowercase, tanpa spasi, menggunakan hyphen/dash)
+    slug VARCHAR(50) NOT NULL UNIQUE,
     icon_class VARCHAR(50) DEFAULT NULL, -- Class icon font awesome / lainnya
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -49,7 +51,7 @@ CREATE TABLE IF NOT EXISTS destinations (
     regency_id INT NOT NULL,
     category_id INT NOT NULL,
     name VARCHAR(150) NOT NULL,
-    slug VARCHAR(150) NOT NULL UNIQUE, -- Untuk URL friendly (lowercase, tanpa spasi, menggunakan hyphen/dash)
+    slug VARCHAR(150) NOT NULL UNIQUE,
     description TEXT,
     address TEXT,
     map_coordinates VARCHAR(100) DEFAULT NULL, -- Latitude, Longitude
@@ -95,9 +97,40 @@ CREATE TABLE IF NOT EXISTS reviews (
     FOREIGN KEY (destination_id) REFERENCES destinations(id) ON DELETE CASCADE
 );
 
+-- ==========================================
+-- 7. Table: Events
+-- Kalender event pariwisata
+-- ==========================================
+CREATE TABLE IF NOT EXISTS events (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    destination_id INT DEFAULT NULL, -- Bisa null jika event umum/kota
+    title VARCHAR(150) NOT NULL,
+    description TEXT,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    poster_url VARCHAR(255) DEFAULT NULL,
+    status ENUM('upcoming', 'ongoing', 'completed') DEFAULT 'upcoming',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (destination_id) REFERENCES destinations(id) ON DELETE SET NULL
+);
 
 -- ==========================================
--- . Table: Packages (Tiket/Paket Wisata)
+-- 8. Table: Inquiries
+-- Pesan dari form Contact Us
+-- ==========================================
+CREATE TABLE IF NOT EXISTS inquiries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    subject VARCHAR(150) NOT NULL,
+    message TEXT NOT NULL,
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ==========================================
+-- 9. Table: Packages (Tiket/Paket Wisata)
 -- Produk yang bisa dibeli untuk setiap destinasi
 -- Contoh: "Tiket Masuk Dewasa", "Paket Camping 2D1N"
 -- ==========================================
@@ -115,7 +148,7 @@ CREATE TABLE IF NOT EXISTS packages (
 );
 
 -- ==========================================
--- 8. Table: Bookings (Transaksi Reservasi)
+-- 10. Table: Bookings (Transaksi Reservasi)
 -- Header transaksi pembelian
 -- ==========================================
 CREATE TABLE IF NOT EXISTS bookings (
@@ -130,7 +163,7 @@ CREATE TABLE IF NOT EXISTS bookings (
 );
 
 -- ==========================================
--- 9. Table: Booking Details (Item Transaksi)
+-- 11. Table: Booking Details (Item Transaksi)
 -- Menyimpan detail tiket/paket apa saja yang dibeli dalam 1 transaksi
 -- ==========================================
 CREATE TABLE IF NOT EXISTS booking_details (
@@ -148,25 +181,21 @@ CREATE TABLE IF NOT EXISTS booking_details (
 );
 
 -- ==========================================
--- 10. Table: Payments (Pembayaran)
+-- 12. Table: Payments (Pembayaran)
 -- Mencatat riwayat pembayaran
--- Support untuk: Online Payment & Cash Payment
 -- ==========================================
 CREATE TABLE IF NOT EXISTS payments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     booking_id INT NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
-    method VARCHAR(50), -- "Bank Transfer", "E-Wallet", "Credit Card", "Cash"
-    payment_proof VARCHAR(255) DEFAULT NULL, -- URL gambar bukti transfer (manual) atau foto bukti cash
-    transaction_id VARCHAR(100) DEFAULT NULL, -- External ID dari Payment Gateway (Midtrans/Xendit) atau reference number untuk cash
+    method VARCHAR(50), -- "Bank Transfer", "E-Wallet", "Credit Card"
+    payment_proof VARCHAR(255) DEFAULT NULL, -- URL gambar bukti transfer (manual)
+    transaction_id VARCHAR(100) DEFAULT NULL, -- External ID dari Payment Gateway (Midtrans/Xendit)
     payment_status ENUM('pending', 'success', 'failed') DEFAULT 'pending',
-    paid_at TIMESTAMP NULL DEFAULT NULL,
-    verified_by INT DEFAULT NULL, -- Admin/Kasir yang verifikasi pembayaran (user_id, khusus untuk cash payment)
-    notes TEXT DEFAULT NULL, -- Catatan pembayaran (misal: "Bayar tunai ke kasir Budi", "Bukti: struk #123")
+    paid_at TIMESTAMP DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
-    FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE,
-    FOREIGN KEY (verified_by) REFERENCES users(id) ON DELETE SET NULL
+    FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE
 );
 
 -- ==========================================
@@ -187,8 +216,7 @@ INSERT INTO categories (name, slug, icon_class) VALUES
 ('Wisata Budaya', 'culture', 'fas fa-landmark'),
 ('Wisata Kuliner', 'culinary', 'fas fa-utensils');
 
--- Insert Admin User (Password: admin123 and user123)
--- Note: These are bcrypt hashes. In production, generate these using PHP's password_hash()
-INSERT INTO users (username, email, password, role) VALUES 
-('admin', 'admin@explorekaltim.com', '$2y$12$LQv3c1yycEPICh0k.0uYOeP9rEZiRg7h8J7J7J7J7J7J7J7J7J7J7O', 'admin'),
-('budi', 'budi@gmail.com', '$2y$12$LQv3c1yycEPICh0k.0uYOeP9rEZiRg7h8J7J7J7J7J7J7J7J7J7J7O', 'user');
+-- Insert Admin User (Password: admin123 -> Hash needs to be generated in app, using placeholder here)
+INSERT INTO users (username, email, password_hash, role) VALUES 
+('admin', 'admin@explorekaltim.com', '$2b$10$PlaceHolderHashForAdmin123', 'admin'),
+('budi', 'budi@gmail.com', '$2b$10$PlaceHolderHash', 'user');
