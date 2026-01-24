@@ -187,8 +187,22 @@ INSERT INTO categories (name, slug, icon_class) VALUES
 ('Wisata Budaya', 'culture', 'fas fa-landmark'),
 ('Wisata Kuliner', 'culinary', 'fas fa-utensils');
 
--- Insert Admin User (Password: admin123 and user123)
+-- Insert Destinations
+INSERT INTO destinations (regency_id, category_id, name, slug, description, address, map_coordinates, operating_hours, ticket_price, is_featured) VALUES 
+(3, 1, 'Pulau Derawan', 'pulau-derawan', 'Surga bawah laut dengan penyu hijau dan terumbu karang yang spektakuler.', 'Kepulauan Derawan, Berau', '2.2519, 118.2436', '24 Jam', 0, 1),
+(3, 1, 'Danau Kakaban', 'danau-kakaban', 'Danau purba dengan ubur-ubur yang tidak menyengat.', 'Pulau Kakaban, Berau', '2.1481, 118.5306', '08:00 - 17:00', 25000, 1),
+(1, 4, 'Kampung Ketupat', 'kampung-ketupat', 'Destinasi kuliner dan wisata sungai di tepian Mahakam.', 'Jl. Slamet Riyadi, Samarinda', '-0.5021, 117.1536', '10:00 - 22:00', 5000, 0),
+(4, 3, 'Museum Mulawarman', 'museum-mulawarman', 'Bekas istana Kesultanan Kutai Kartanegara yang menyimpan sejarah panjang.', 'Tenggarong, Kutai Kartanegara', '-0.4147, 116.9911', '09:00 - 16:00', 10000, 1);
+
+-- Insert Users (Password: admin123 and user123)
 -- Note: These are bcrypt hashes. In production, generate these using PHP's password_hash()
 INSERT INTO users (username, email, password, role) VALUES 
 ('admin', 'admin@explorekaltim.com', '$2y$12$LQv3c1yycEPICh0k.0uYOeP9rEZiRg7h8J7J7J7J7J7J7J7J7J7J7O', 'admin'),
 ('budi', 'budi@gmail.com', '$2y$12$LQv3c1yycEPICh0k.0uYOeP9rEZiRg7h8J7J7J7J7J7J7J7J7J7J7O', 'user');
+
+-- Insert Destination Galleries (Thumbnails)
+INSERT INTO destination_galleries (destination_id, image_url, caption, is_primary) VALUES 
+(1, 'https://images.unsplash.com/photo-1544919982-b61976f0ba43?auto=format&fit=crop&w=800&q=80', 'Keindahan Pulau Derawan', 1),
+(2, 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=800&q=80', 'Ubur-ubur Kakaban', 1),
+(3, 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80', 'Kuliner Khas Kaltim', 1),
+(4, 'https://images.unsplash.com/photo-1596422846543-b5c64483f939?auto=format&fit=crop&w=800&q=80', 'Budaya Kutai', 1);

@@ -41,7 +41,7 @@ $avatarUrl = $_SESSION['avatar_url'] ?? '';
       <!-- Desktop Navigation -->
       <div class="hidden lg:flex items-center gap-8">
         <a href="/ExploreKaltim/index.html#home" class="nav-link">Beranda</a>
-        <a href="/ExploreKaltim/index.html#destinations" class="nav-link">Destinasi</a>
+        <a href="/ExploreKaltim/explorasi.php" class="nav-link">Destinasi</a>
         <a href="/ExploreKaltim/index.html#gallery" class="nav-link">Galeri</a>
         <a href="/ExploreKaltim/index.html#testimonials" class="nav-link">Testimoni</a>
         <a href="/ExploreKaltim/index.html#contact" class="nav-link">Kontak</a>
@@ -117,7 +117,7 @@ $avatarUrl = $_SESSION['avatar_url'] ?? '';
     <div class="container mx-auto px-4 py-6 sm:py-8">
       <div class="flex flex-col gap-2">
         <a href="/ExploreKaltim/index.html#home" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu>Beranda</a>
-        <a href="/ExploreKaltim/index.html#destinations" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu>Destinasi</a>
+        <a href="/ExploreKaltim/explorasi.php" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu>Destinasi</a>
         <a href="/ExploreKaltim/index.html#gallery" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu>Galeri</a>
         <a href="/ExploreKaltim/index.html#testimonials" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu>Testimoni</a>
         <a href="/ExploreKaltim/index.html#contact" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu>Kontak</a>

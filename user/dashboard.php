@@ -15,6 +15,23 @@ requireLogin('../login.php');
 
 // Get current user
 $user = getCurrentUser();
+
+$conn = getDBConnection();
+$userId = $user['id'];
+
+// Total Bookings
+$totalRes = $conn->query("SELECT COUNT(*) as total FROM bookings WHERE user_id = $userId");
+$totalBookings = $totalRes->fetch_assoc()['total'];
+
+// Pending Payments
+$pendingRes = $conn->query("SELECT COUNT(*) as total FROM bookings WHERE user_id = $userId AND status IN ('pending', 'waiting_payment')");
+$pendingPayments = $pendingRes->fetch_assoc()['total'];
+
+// Completed Trips
+$completedRes = $conn->query("SELECT COUNT(*) as total FROM bookings WHERE user_id = $userId AND status = 'completed'");
+$completedTrips = $completedRes->fetch_assoc()['total'];
+
+closeDBConnection($conn);
 ?>
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
@@ -104,7 +121,7 @@ $user = getCurrentUser();
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm text-gray-600 mb-1">Total Bookings</p>
-                        <p class="text-3xl font-display font-bold text-gray-900">0</p>
+                        <p class="text-3xl font-display font-bold text-gray-900"><?php echo $totalBookings; ?></p>
                     </div>
                     <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                         <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +135,7 @@ $user = getCurrentUser();
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm text-gray-600 mb-1">Pending Payments</p>
-                        <p class="text-3xl font-display font-bold text-gray-900">0</p>
+                        <p class="text-3xl font-display font-bold text-gray-900"><?php echo $pendingPayments; ?></p>
                     </div>
                     <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
                         <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -132,7 +149,7 @@ $user = getCurrentUser();
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm text-gray-600 mb-1">Completed Trips</p>
-                        <p class="text-3xl font-display font-bold text-gray-900">0</p>
+                        <p class="text-3xl font-display font-bold text-gray-900"><?php echo $completedTrips; ?></p>
                     </div>
                     <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
                         <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,7 +164,7 @@ $user = getCurrentUser();
         <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 mb-8">
             <h3 class="text-lg font-display font-bold text-gray-900 mb-4">Quick Actions</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <a href="../index.html#destinations" class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition">
+                <a href="../explorasi.php" class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition">
                     <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
                         <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -193,7 +210,7 @@ $user = getCurrentUser();
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                 </svg>
                 <p class="text-gray-500 mb-4">No recent activity yet</p>
-                <a href="../index.html#destinations" class="inline-flex items-center gap-2 px-6 py-3 bg-primary-800 text-white rounded-lg hover:bg-primary-700 transition">
+                <a href="../explorasi.php" class="inline-flex items-center gap-2 px-6 py-3 bg-primary-800 text-white rounded-lg hover:bg-primary-700 transition">
                     Start Exploring
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
