@@ -73,6 +73,9 @@ closeDBConnection($conn);
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="src/css/style.css">
+    
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -289,5 +292,61 @@ closeDBConnection($conn);
             <p>&copy; 2024 Explore Kaltim. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (menuBtn && mobileMenu) {
+                let isOpen = false;
+                const lines = menuBtn.querySelectorAll('.hamburger-line');
+                
+                menuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    isOpen = !isOpen;
+                    mobileMenu.classList.toggle('open', isOpen);
+                    document.body.style.overflow = isOpen ? 'hidden' : '';
+                    
+                    // Hamburger animation
+                    if (isOpen) {
+                        lines[0].style.transform = 'translateY(8px) rotate(45deg)';
+                        lines[1].style.opacity = '0';
+                        lines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+                    } else {
+                        lines[0].style.transform = '';
+                        lines[1].style.opacity = '1';
+                        lines[2].style.transform = '';
+                    }
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (isOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                        isOpen = false;
+                        mobileMenu.classList.remove('open');
+                        document.body.style.overflow = '';
+                        lines[0].style.transform = '';
+                        lines[1].style.opacity = '1';
+                        lines[2].style.transform = '';
+                    }
+                });
+                
+                // Close menu when clicking links
+                const menuLinks = mobileMenu.querySelectorAll('[data-close-menu]');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        isOpen = false;
+                        mobileMenu.classList.remove('open');
+                        document.body.style.overflow = '';
+                        lines[0].style.transform = '';
+                        lines[1].style.opacity = '1';
+                        lines[2].style.transform = '';
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>

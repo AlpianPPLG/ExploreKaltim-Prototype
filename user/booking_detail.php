@@ -27,7 +27,7 @@ if ($bookingId === 0) {
 $query = "
     SELECT b.*, bd.quantity, bd.price_per_unit, bd.subtotal, bd.travel_date, bd.note,
            p.name as package_name, d.name as dest_name,
-           pay.payment_status, pay.method, pay.payment_proof
+           pay.id as payment_id, pay.payment_status, pay.method, pay.payment_proof, pay.rejection_reason
     FROM bookings b
     JOIN booking_details bd ON b.id = bd.booking_id
     JOIN packages p ON bd.package_id = p.id
@@ -47,19 +47,36 @@ $booking = $result->fetch_assoc();
 
 // Handle Payment Upload
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_payment'])) {
-    $method = $_POST['method'];
-    $paymentProof = $_POST['payment_proof_url']; // For prototype we use URL
+    $method = trim($_POST['method']);
+    $paymentProof = trim($_POST['payment_proof_url']); // For prototype we use URL
     
-    // Process Payment
-    $stmt = $conn->prepare("INSERT INTO payments (booking_id, amount, method, payment_proof, payment_status) VALUES (?, ?, ?, ?, 'pending')");
-    $stmt->bind_param("idss", $bookingId, $booking['total_amount'], $method, $paymentProof);
+    // Validation
+    $paymentErrors = [];
     
-    if ($stmt->execute()) {
-        // Update booking status
-        $conn->query("UPDATE bookings SET status = 'waiting_payment' WHERE id = $bookingId");
-        $_SESSION['success_msg'] = "Bukti pembayaran berhasil diupload! Admin akan segera memverifikasi.";
-        header("Location: booking_detail.php?id=" . $bookingId);
-        exit();
+    if (empty($method)) {
+        $paymentErrors[] = "Metode pembayaran harus dipilih.";
+    }
+    
+    if (empty($paymentProof)) {
+        $paymentErrors[] = "URL bukti pembayaran harus diisi.";
+    } elseif (!filter_var($paymentProof, FILTER_VALIDATE_URL)) {
+        $paymentErrors[] = "URL bukti pembayaran tidak valid.";
+    }
+    
+    if (empty($paymentErrors)) {
+        // Process Payment
+        $stmt = $conn->prepare("INSERT INTO payments (booking_id, amount, method, payment_proof, payment_status) VALUES (?, ?, ?, ?, 'pending')");
+        $stmt->bind_param("idss", $bookingId, $booking['total_amount'], $method, $paymentProof);
+        
+        if ($stmt->execute()) {
+            // Update booking status
+            $conn->query("UPDATE bookings SET status = 'waiting_payment' WHERE id = $bookingId");
+            $_SESSION['success_msg'] = "Bukti pembayaran berhasil diupload! Admin akan segera memverifikasi.";
+            header("Location: booking_detail.php?id=" . $bookingId);
+            exit();
+        } else {
+            $paymentErrors[] = "Gagal mengupload bukti pembayaran. Silakan coba lagi.";
+        }
     }
 }
 
@@ -164,6 +181,40 @@ $status = getStatusLabel($booking['status']);
                 </div>
             <?php endif; ?>
 
+            <?php if ($booking['payment_status'] === 'approved'): ?>
+                <div class="mb-8 p-6 bg-green-50 border border-green-200 text-green-800 rounded-3xl">
+                    <p class="font-bold flex items-center gap-3">
+                        <i class="fas fa-check-circle text-2xl"></i>
+                        <span>Pembayaran Anda telah disetujui! Terima kasih telah menggunakan layanan kami.</span>
+                    </p>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($booking['payment_status'] === 'rejected' && $booking['rejection_reason']): ?>
+                <div class="mb-8 p-6 bg-red-50 border border-red-200 text-red-800 rounded-3xl">
+                    <p class="font-bold flex items-center gap-3 mb-3">
+                        <i class="fas fa-times-circle text-2xl"></i>
+                        <span>Pembayaran Anda ditolak</span>
+                    </p>
+                    <p class="text-sm ml-9"><strong>Alasan:</strong> <?php echo escapeOutput($booking['rejection_reason']); ?></p>
+                    <p class="text-sm ml-9 mt-2">Silakan upload bukti pembayaran yang baru.</p>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($paymentErrors) && !empty($paymentErrors)): ?>
+                <div class="mb-8 p-6 bg-red-50 border border-red-200 text-red-700 rounded-3xl">
+                    <p class="font-bold mb-2 flex items-center gap-3">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Terjadi Kesalahan:
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        <?php foreach ($paymentErrors as $error): ?>
+                            <li><?php echo $error; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
                 <!-- Main Invoice Info -->
@@ -229,11 +280,13 @@ $status = getStatusLabel($booking['status']);
                 <div class="md:col-span-1">
                     <div class="sticky top-24 space-y-6">
                         
-                        <?php if ($booking['status'] === 'pending'): ?>
+                        <?php if ($booking['status'] === 'pending' || $booking['payment_status'] === 'rejected'): ?>
                             <!-- Payment Instruction -->
                             <div class="bg-white rounded-3xl shadow-lg border border-primary-100 p-8 overflow-hidden relative">
                                 <div class="absolute top-0 left-0 w-2 h-full bg-primary-600"></div>
-                                <h3 class="text-xl font-heading font-bold text-gray-900 mb-6">Bayar Sekarang</h3>
+                                <h3 class="text-xl font-heading font-bold text-gray-900 mb-6">
+                                    <?php echo $booking['payment_status'] === 'rejected' ? 'Upload Ulang Bukti Bayar' : 'Bayar Sekarang'; ?>
+                                </h3>
                                 
                                 <div class="space-y-6 mb-8">
                                     <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
@@ -279,7 +332,7 @@ $status = getStatusLabel($booking['status']);
                                 <h4 class="font-bold text-orange-800 mb-2">Sedang Diverifikasi</h4>
                                 <p class="text-sm text-orange-600 leading-relaxed">Admin sedang memeriksa pembayaran Kamu. Update akan muncul di sini segera.</p>
                             </div>
-                        <?php elseif (in_array($booking['status'], ['paid', 'confirmed', 'completed'])): ?>
+                        <?php elseif (in_array($booking['status'], ['paid', 'confirmed', 'completed']) || $booking['payment_status'] === 'approved'): ?>
                             <div class="bg-primary-50 p-8 rounded-3xl border border-primary-100 text-center">
                                 <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
                                     <i class="fas fa-check-double text-primary-600 text-2xl"></i>

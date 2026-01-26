@@ -44,29 +44,48 @@ $pkg = $result->fetch_assoc();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $travelDate = $_POST['travel_date'];
     $quantity = (int)$_POST['quantity'];
-    $note = $_POST['note'];
+    $note = trim($_POST['note']);
     
-    $totalAmount = $pkg['price'] * $quantity;
-    $bookingCode = "INV-" . date('Ymd') . "-" . strtoupper(substr(uniqid(), -5));
+    // Validation
+    $errors = [];
     
-    // 1. Insert into bookings
-    $stmt = $conn->prepare("INSERT INTO bookings (user_id, booking_code, total_amount, status) VALUES (?, ?, ?, 'pending')");
-    $stmt->bind_param("isd", $user['id'], $bookingCode, $totalAmount);
+    // Validate travel date (must be today or future)
+    $today = date('Y-m-d');
+    if ($travelDate < $today) {
+        $errors[] = "Tanggal perjalanan tidak boleh di masa lalu.";
+    }
     
-    if ($stmt->execute()) {
-        $bookingId = $conn->insert_id;
+    // Validate quantity
+    if ($quantity < 1) {
+        $errors[] = "Jumlah peserta minimal 1 orang.";
+    }
+    
+    if (empty($errors)) {
+        $totalAmount = $pkg['price'] * $quantity;
+        $bookingCode = "INV-" . date('Ymd') . "-" . strtoupper(substr(uniqid(), -5));
         
-        // 2. Insert into booking_details
-        $detailStmt = $conn->prepare("INSERT INTO booking_details (booking_id, package_id, quantity, price_per_unit, subtotal, travel_date, note) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $detailStmt->bind_param("iiiddss", $bookingId, $packageId, $quantity, $pkg['price'], $totalAmount, $travelDate, $note);
+        // 1. Insert into bookings
+        $stmt = $conn->prepare("INSERT INTO bookings (user_id, booking_code, total_amount, status) VALUES (?, ?, ?, 'pending')");
+        $stmt->bind_param("isd", $user['id'], $bookingCode, $totalAmount);
         
-        if ($detailStmt->execute()) {
-            $_SESSION['booking_success'] = "Gooood news! Pesanan Kamu berhasil dibuat. Silakan lakukan pembayaran.";
-            header("Location: user/booking_detail.php?id=" . $bookingId);
-            exit();
+        if ($stmt->execute()) {
+            $bookingId = $conn->insert_id;
+            
+            // 2. Insert into booking_details
+            $detailStmt = $conn->prepare("INSERT INTO booking_details (booking_id, package_id, quantity, price_per_unit, subtotal, travel_date, note) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $detailStmt->bind_param("iiiddss", $bookingId, $packageId, $quantity, $pkg['price'], $totalAmount, $travelDate, $note);
+            
+            if ($detailStmt->execute()) {
+                $_SESSION['booking_success'] = "Good news! Pesanan Kamu berhasil dibuat. Silakan lakukan pembayaran.";
+                header("Location: user/booking_detail.php?id=" . $bookingId);
+                exit();
+            } else {
+                $errors[] = "Gagal menyimpan detail booking. Silakan coba lagi.";
+            }
+        } else {
+            $errors[] = "Gagal membuat pesanan. Silakan coba lagi.";
         }
     }
-    $error = "Gagal membuat pesanan. Silakan coba lagi.";
 }
 
 closeDBConnection($conn);
@@ -85,6 +104,9 @@ closeDBConnection($conn);
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="src/css/style.css">
     
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -130,9 +152,13 @@ closeDBConnection($conn);
                         <p class="text-gray-500">Lengkapi detail perjalanan Anda di bawah ini.</p>
                     </div>
 
-                    <?php if (isset($error)): ?>
+                    <?php if (isset($errors) && !empty($errors)): ?>
                         <div class="mb-8 p-4 bg-red-100 border border-red-200 text-red-700 rounded-2xl">
-                            <?php echo $error; ?>
+                            <ul class="list-disc list-inside space-y-1">
+                                <?php foreach ($errors as $error): ?>
+                                    <li><?php echo $error; ?></li>
+                                <?php endforeach; ?>
+                            </ul>
                         </div>
                     <?php endif; ?>
 
@@ -246,6 +272,72 @@ closeDBConnection($conn);
             
             let total = qty * basePrice;
             summaryTotal.textContent = 'Rp ' + total.toLocaleString('id-ID');
+        });
+        
+        // Form validation
+        const bookingForm = document.querySelector('form');
+        const travelDateInput = document.querySelector('input[name="travel_date"]');
+        
+        bookingForm.addEventListener('submit', function(e) {
+            const travelDate = new Date(travelDateInput.value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            if (travelDate < today) {
+                e.preventDefault();
+                alert('Tanggal perjalanan tidak boleh di masa lalu!');
+                return false;
+            }
+            
+            const qty = parseInt(qtyInput.value);
+            if (qty < 1) {
+                e.preventDefault();
+                alert('Jumlah peserta minimal 1 orang!');
+                return false;
+            }
+            
+            return true;
+        });
+    </script>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (menuBtn && mobileMenu) {
+                let isOpen = false;
+                const lines = menuBtn.querySelectorAll('.hamburger-line');
+                
+                menuBtn.addEventListener('click', function() {
+                    isOpen = !isOpen;
+                    mobileMenu.classList.toggle('open', isOpen);
+                    document.body.style.overflow = isOpen ? 'hidden' : '';
+                    
+                    if (isOpen) {
+                        lines[0].style.transform = 'translateY(8px) rotate(45deg)';
+                        lines[1].style.opacity = '0';
+                        lines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+                    } else {
+                        lines[0].style.transform = '';
+                        lines[1].style.opacity = '1';
+                        lines[2].style.transform = '';
+                    }
+                });
+                
+                const menuLinks = mobileMenu.querySelectorAll('[data-close-menu]');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        isOpen = false;
+                        mobileMenu.classList.remove('open');
+                        document.body.style.overflow = '';
+                        lines[0].style.transform = '';
+                        lines[1].style.opacity = '1';
+                        lines[2].style.transform = '';
+                    });
+                });
+            }
         });
     </script>
 </body>

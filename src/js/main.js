@@ -215,7 +215,14 @@ function initVideoModal() {
 // ==========================================
 function initDestinations() {
   const container = document.getElementById("destinations-grid");
-  if (!container || typeof destinations === "undefined") return;
+  if (!container) {
+    console.warn("destinations-grid not found - skipping initialization");
+    return;
+  }
+  if (typeof destinations === "undefined") {
+    console.warn("destinations data not loaded - skipping initialization");
+    return;
+  }
 
   renderDestinations(destinations);
 }
@@ -354,7 +361,14 @@ function getCategoryName(category) {
 // ==========================================
 function initFilters() {
   const filterContainer = document.getElementById("filter-container");
-  if (!filterContainer || typeof categories === "undefined") return;
+  if (!filterContainer) {
+    console.warn("filter-container not found - skipping initialization");
+    return;
+  }
+  if (typeof categories === "undefined") {
+    console.warn("categories data not loaded - skipping initialization");
+    return;
+  }
 
   // Render filter pills
   filterContainer.innerHTML = categories
@@ -397,7 +411,14 @@ function initFilters() {
 // ==========================================
 function initGallery() {
   const galleryContainer = document.getElementById("gallery-grid");
-  if (!galleryContainer || typeof galleryImages === "undefined") return;
+  if (!galleryContainer) {
+    console.warn("gallery-grid not found - skipping initialization");
+    return;
+  }
+  if (typeof galleryImages === "undefined") {
+    console.warn("galleryImages data not loaded - skipping initialization");
+    return;
+  }
 
   // Render gallery
   galleryContainer.innerHTML = galleryImages
@@ -432,11 +453,21 @@ function openLightbox(id) {
   const lightbox = document.getElementById("lightbox");
   const lightboxImage = document.getElementById("lightbox-image");
 
-  if (!lightbox || !lightboxImage || typeof galleryImages === "undefined")
+  if (!lightbox || !lightboxImage) {
+    console.warn("Lightbox elements not found");
     return;
+  }
+  
+  if (typeof galleryImages === "undefined") {
+    console.warn("galleryImages data not loaded");
+    return;
+  }
 
   const imageIndex = galleryImages.findIndex((img) => img.id === id);
-  if (imageIndex === -1) return;
+  if (imageIndex === -1) {
+    console.warn(`Image with id ${id} not found`);
+    return;
+  }
 
   currentLightboxIndex = imageIndex;
   const image = galleryImages[currentLightboxIndex];
@@ -458,7 +489,15 @@ function closeLightbox() {
 
 function navigateLightbox(direction) {
   const lightboxImage = document.getElementById("lightbox-image");
-  if (!lightboxImage || typeof galleryImages === "undefined") return;
+  if (!lightboxImage) {
+    console.warn("lightbox-image not found");
+    return;
+  }
+  
+  if (typeof galleryImages === "undefined") {
+    console.warn("galleryImages data not loaded");
+    return;
+  }
 
   currentLightboxIndex += direction;
 
@@ -497,7 +536,14 @@ window.navigateLightbox = navigateLightbox;
 // ==========================================
 function initTestimonials() {
   const container = document.getElementById("testimonials-container");
-  if (!container || typeof testimonials === "undefined") return;
+  if (!container) {
+    console.warn("testimonials-container not found - skipping initialization");
+    return;
+  }
+  if (typeof testimonials === "undefined") {
+    console.warn("testimonials data not loaded - skipping initialization");
+    return;
+  }
 
   container.innerHTML = testimonials
     .map(

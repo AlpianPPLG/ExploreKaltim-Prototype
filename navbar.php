@@ -15,7 +15,7 @@ $avatarUrl = $_SESSION['avatar_url'] ?? '';
   <div class="container mx-auto px-3 sm:px-4 lg:px-8">
     <div class="flex items-center justify-between h-16 sm:h-20">
       <!-- Logo -->
-      <a href="/ExploreKaltim/index.html" class="flex items-center gap-2 sm:gap-3 group">
+      <a href="/ExploreKaltim/index.php" class="flex items-center gap-2 sm:gap-3 group">
         <div
           class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-secondary-400 to-primary-600 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300 shadow-lg"
         >
@@ -40,11 +40,11 @@ $avatarUrl = $_SESSION['avatar_url'] ?? '';
 
       <!-- Desktop Navigation -->
       <div class="hidden lg:flex items-center gap-8">
-        <a href="/ExploreKaltim/index.html#home" class="nav-link">Beranda</a>
-        <a href="/ExploreKaltim/explorasi.php" class="nav-link">Destinasi</a>
-        <a href="/ExploreKaltim/index.html#gallery" class="nav-link">Galeri</a>
-        <a href="/ExploreKaltim/index.html#testimonials" class="nav-link">Testimoni</a>
-        <a href="/ExploreKaltim/index.html#contact" class="nav-link">Kontak</a>
+        <a href="/ExploreKaltim/index.php#home" class="nav-link" data-nav-link="home">Beranda</a>
+        <a href="/ExploreKaltim/explorasi.php" class="nav-link" data-nav-link="destinasi">Destinasi</a>
+        <a href="/ExploreKaltim/index.php#gallery" class="nav-link" data-nav-link="gallery">Galeri</a>
+        <a href="/ExploreKaltim/index.php#testimonials" class="nav-link" data-nav-link="testimonials">Testimoni</a>
+        <a href="/ExploreKaltim/index.php#contact" class="nav-link" data-nav-link="contact">Kontak</a>
       </div>
 
       <!-- Auth & CTA Buttons Desktop -->
@@ -116,11 +116,11 @@ $avatarUrl = $_SESSION['avatar_url'] ?? '';
   <div id="mobile-menu" class="mobile-menu lg:hidden">
     <div class="container mx-auto px-4 py-6 sm:py-8">
       <div class="flex flex-col gap-2">
-        <a href="/ExploreKaltim/index.html#home" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu>Beranda</a>
-        <a href="/ExploreKaltim/explorasi.php" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu>Destinasi</a>
-        <a href="/ExploreKaltim/index.html#gallery" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu>Galeri</a>
-        <a href="/ExploreKaltim/index.html#testimonials" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu>Testimoni</a>
-        <a href="/ExploreKaltim/index.html#contact" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu>Kontak</a>
+        <a href="/ExploreKaltim/index.php#home" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu data-nav-link="home">Beranda</a>
+        <a href="/ExploreKaltim/explorasi.php" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu data-nav-link="destinasi">Destinasi</a>
+        <a href="/ExploreKaltim/index.php#gallery" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu data-nav-link="gallery">Galeri</a>
+        <a href="/ExploreKaltim/index.php#testimonials" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu data-nav-link="testimonials">Testimoni</a>
+        <a href="/ExploreKaltim/index.php#contact" class="text-2xl font-heading text-primary-800 py-4 border-b border-primary-100 hover:text-secondary-500 hover:pl-4 transition-all" data-close-menu data-nav-link="contact">Kontak</a>
 
         <!-- Auth Buttons Mobile -->
         <div class="mt-8 space-y-3">
@@ -160,3 +160,49 @@ $avatarUrl = $_SESSION['avatar_url'] ?? '';
     </div>
   </div>
 </nav>
+
+<script>
+// Smart Navigation Handler
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPath = window.location.pathname;
+    const isIndexPage = currentPath.includes('index.php') || currentPath.endsWith('/ExploreKaltim/') || currentPath.endsWith('/ExploreKaltim');
+    
+    // Handle all navigation links
+    const navLinks = document.querySelectorAll('[data-nav-link]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const target = this.getAttribute('data-nav-link');
+            
+            // If clicking on Destinasi link, always go to explorasi.php
+            if (target === 'destinasi') {
+                return; // Let default behavior work
+            }
+            
+            // If we're on index page and clicking section links
+            if (isIndexPage && target !== 'destinasi') {
+                e.preventDefault();
+                const section = document.getElementById(target);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu && mobileMenu.classList.contains('open')) {
+                        mobileMenu.classList.remove('open');
+                        document.body.style.overflow = '';
+                        const lines = document.querySelectorAll('.hamburger-line');
+                        lines[0].style.transform = '';
+                        lines[1].style.opacity = '1';
+                        lines[2].style.transform = '';
+                    }
+                } else {
+                    // Section not found, go to index page
+                    window.location.href = '/ExploreKaltim/index.php#' + target;
+                }
+            }
+            // If we're NOT on index page, let the link navigate to index.php with hash
+            // (default behavior will work)
+        });
+    });
+});
+</script>

@@ -5,8 +5,9 @@
  * Script untuk memuat komponen HTML secara modular
  */
 
-// Component configuration (navbar removed, now using PHP include)
+// Component configuration
 const componentConfig = [
+  { id: 'navbar-placeholder', path: './src/components/navbar.html' },
   { id: 'hero-placeholder', path: './src/components/hero.html' },
   { id: 'destinations-placeholder', path: './src/components/destinations.html' },
   { id: 'experience-placeholder', path: './src/components/experience.html' },
@@ -21,7 +22,7 @@ async function loadComponent(id, path) {
   try {
     const element = document.getElementById(id);
     if (!element) {
-      console.warn(`Element with id "${id}" not found`);
+      console.warn(`Element with id "${id}" not found - skipping`);
       return null;
     }
 
@@ -29,7 +30,8 @@ async function loadComponent(id, path) {
     const cacheBuster = `?v=${Date.now()}`;
     const response = await fetch(path + cacheBuster);
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      console.warn(`Failed to load component ${path}: ${response.status}`);
+      return null;
     }
 
     const html = await response.text();
@@ -40,9 +42,10 @@ async function loadComponent(id, path) {
       detail: { id, path }
     }));
 
+    console.log(`✓ Loaded component: ${id}`);
     return html;
   } catch (error) {
-    console.error(`Error loading component ${path}:`, error);
+    console.warn(`Error loading component ${path}:`, error.message);
     return null;
   }
 }
